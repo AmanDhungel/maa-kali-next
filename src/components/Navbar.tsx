@@ -7,7 +7,7 @@ import DarkModeToggle from "./DarkMode"
   
   export function Navbar() {
     return (
-      <Menubar className="p-4 sticky">
+      <Menubar className="p-4  fixed">
         <MenubarMenu>
           <MenubarTrigger>Home</MenubarTrigger>
         </MenubarMenu>

@@ -9,7 +9,7 @@ const ServicesPage = () => {
         <div className='flex justify-center mt-24'>
        <Button variant={'outline'} className='text-xl underline font-bold p-4 tracking-wider underline-offset-4'>Services</Button>
         </div>
-        <div className='flex flex-col items-center justify-center gap-2 mt-10'>
+        <div className='flex items-center flex-wrap w-[110rem] ml-20 justify-center gap-2 mt-10'>
         {
             services.map((item) => (
                 <Card title={item.title} description={item.description} key={item.id} 
