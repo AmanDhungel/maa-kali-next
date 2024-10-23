@@ -1,48 +1,38 @@
+'use client'
 import { ArrowDownNarrowWide, PencilRuler } from 'lucide-react'
 import React from 'react'
 import { Navbar } from './Navbar'
-import ReactPlayer from 'react-player'
 import ServicesPage from './ServicesPage'
-import heroVideo from '../../public/video/video.mp4'
+import Image from 'next/image'
 
 const FullPage = () => {
   return (
     <>
-    <div>
-      <div className="flex justify-center mt-4 mr-4">
-        <Navbar/>
+      <div>
+        <div className="flex justify-center mt-4 mr-4">
+          <Navbar/>
+        </div>
+        <div className="flex flex-col items-center mt-20 gap-4">
+          <h1 className="text-2xl flex gap-2 items-center ml-12">Welcome To The <span className="underline underline-offset-8 font-bold">Hardware</span><PencilRuler/></h1>
+          <h2 className="text-xl ml-12">visit us Physically</h2>
+          <div className="animate-bounce">
+            <ArrowDownNarrowWide className='ml-12'/>
+          </div>
+          <div className="xl:flex gap-3  max-lg:flex-col max-lg:gap-3  max-sm:flex-col">
+           <Image src="/image/maa-kali-hero.JPG" className='rounded-xl max-lg:mb-4' alt="" width={550} height={550}/>
+           <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57420.707630779245!2d85.39663416233422!3d27.655358189762683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1b2f6190d28d%3A0x756c690619ead048!2sMaa%20Kali%20Hardware%2C%20Radhe%20Radhe!5e0!3m2!1sen!2snp!4v1729655231448!5m2!1sen!2snp"
+              width="100%"
+              height="450"
+              style={{ minWidth: "32rem" , border: 0, borderRadius: '0.75rem', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+        <ServicesPage/>
       </div>
-    <div className="flex flex-col items-center mt-20 gap-4">
-      <h1 className="text-2xl flex gap-2 items-center">Welcome To The <span className="underline underline-offset-8 font-bold">Hardware</span><PencilRuler/></h1>
-      <h2 className="text-xl ">Watch Our Testimonials</h2>
-      <div className="animate-bounce">
-      <ArrowDownNarrowWide/>
-      </div>
-      <div className="xl:flex max-lg:flex-col gap-3 max-sm:flex-col">
-      <ReactPlayer url={heroVideo ?  heroVideo : ''} controls playsinline={true} 
-        height="400px" 
-        style={{
-          marginTop: '-20px',
-          borderRadius: '20px',  
-          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',  
-        }}
-        />
-      <ReactPlayer
-      url="https://www.youtube.com/watch?v=2mspw9lyXvQ"
-      height="380px" 
-        config={{
-          youtube: {
-            playerVars: { showinfo: 1 }
-          },
-          facebook: {
-            appId: '12345'
-          }
-        }}
-      />
-      </div>
-    </div>
-    <ServicesPage/>
-    </div>
     </>
   )
 }
