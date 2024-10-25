@@ -1,7 +1,6 @@
 'use client'
 import { ArrowDownNarrowWide, PencilRuler } from 'lucide-react'
 import React from 'react'
-import { Navbar } from './Navbar'
 import ServicesPage from './ServicesPage'
 import Image from 'next/image'
 import OurWork from './OurWork'

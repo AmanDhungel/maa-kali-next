@@ -1,13 +1,14 @@
-import { ArrowBigDownDash } from "lucide-react"
-import Image from "next/image"
-import { Button } from "./ui/button"
-import Link from "next/link"
-import Banner from "./Banner"
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import Banner from './Banner'
+import { ArrowBigDownDash } from 'lucide-react'
+import { Button } from './ui/button'
 
 const Blog = () => {
   return (
-    <>
-    <div className="container relative flex flex-col justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10">
+    <div>
+        <div className="container relative flex flex-col justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10">
     <div className="flex gap-10">
       <Image src="/image/maa-kali-hero.JPG" alt="" className="rounded" width={500} height={500} />
       <div className="flex flex-col gap-5 max-w-">
@@ -24,14 +25,13 @@ const Blog = () => {
         </span>
         
        </h2>
-      <Link href='https://www.google.com/maps/contrib/116341759877772330718/place/ChIJjdKQYS8b6zkRSNDqGQZpbHU/@27.68163,85.3973336,17z/data=!4m6!1m5!8m4!1e2!2s116341759877772330718!3m1!1e1?entry=ttu&g_ep=EgoyMDI0MTAyMi4wIKXMDSoASAFQAw%3D%3D' target="_blank"> <Button className="w-[10rem] font-bold">Vist Us</Button></Link>
+      <Link href='https://www.google.com/maps/contrib/116341759877772330718/place/ChIJjdKQYS8b6zkRSNDqGQZpbHU/@27.68163,85.3973336,17z/data=!4m6!1m5!8m4!1e2!2s116341759877772330718!3m1!1e1?entry=ttu&g_ep=EgoyMDI0MTAyMi4wIKXMDSoASAFQAw%3D%3D' target="_blank">
+       <Button className="w-[10rem] font-bold">Vist Us</Button></Link>
       </div>
     </div>
      </div>
-
      <Banner title="Services" description="Service we provide - हमी ले दिने सेवा हरु " />
-      
-    </>
+    </div>
   )
 }
 
