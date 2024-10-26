@@ -48,7 +48,7 @@ const Services = () => {
     <>
     <div className="container relative flex flex-col justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10">
         <Banner title="Services" description="सेवा हरु तल्ल उल्लेखिथ गरियको छ । "/>
-    <div className="flex gap-3">
+    <div className="flex gap-36">
         <div className="overflow-hidden">
         <ServiceAccordion data={data} className="w-[20rem] mr-24"/>
         </div>

@@ -4,6 +4,7 @@ import React from 'react'
 import Banner from './Banner'
 import { ArrowBigDownDash } from 'lucide-react'
 import { Button } from './ui/button'
+import BlogCard from './BlogCard'
 
 const Blog = () => {
   return (
@@ -27,10 +28,18 @@ const Blog = () => {
        </h2>
       <Link href='https://www.google.com/maps/contrib/116341759877772330718/place/ChIJjdKQYS8b6zkRSNDqGQZpbHU/@27.68163,85.3973336,17z/data=!4m6!1m5!8m4!1e2!2s116341759877772330718!3m1!1e1?entry=ttu&g_ep=EgoyMDI0MTAyMi4wIKXMDSoASAFQAw%3D%3D' target="_blank">
        <Button className="w-[10rem] font-bold">Vist Us</Button></Link>
+            </div>
       </div>
-    </div>
+      </div>
+     <Banner title="Blogs" description="" />
+     <div className='flex flex-wrap justify-center w-[60rem] m-auto'>
+     <BlogCard/>
+     <BlogCard/>
+     <BlogCard/>
+     <BlogCard/>
+     <BlogCard/>
+     <BlogCard/>
      </div>
-     <Banner title="Services" description="Service we provide - हमी ले दिने सेवा हरु " />
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import PhotoGallery from "@/components/PhotoGallery";
+import Blog from "@/components/Blog";
 
 export const metadata: Metadata = {
-    title: "Maa Kali Hardware",
-    description: "Hardware near me, maa kali hardware, hardware shop, hardware shop in nepal",
+    title: "Maa Kali Hardware - Blog",
+    description: "Hardware near me, maa kali hardware, hardware shop, hardware shop in nepal, hardware shop in bhaktapur, hardware shop near radhe radhe",
   };
 
-  export default PhotoGallery;
+  export default Blog;
