@@ -22,7 +22,7 @@ const Blog = () => {
        <h2 className="capitalize text-gray-300"> 
         Our goal not only includes of providing with the product but also with the best customer service. Test it our For yourself. 
         <span className="flex mt-2">
-        हाम्रो उदेश्य भनेको राम्रो सर्वीस र कस्तमर सयातिस्फक्सन रहेको छ ।  आयार अफै महसुस गर्नु होस । 
+        हाम्रो उदेश्य भनेको राम्रो सर्वीस र कस्तमर सयातिस्फक्सन रहेको छ ।  आयर अफै महसुस गर्नु होस । 
         </span>
         
        </h2>

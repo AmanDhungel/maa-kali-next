@@ -5,7 +5,6 @@ import ServicesPage from './ServicesPage'
 import Image from 'next/image'
 import OurWork from './OurWork'
 import ProductTestimonials from './ProductTestimonials'
-import Footer from './Footer'
 
 const FullPage = () => {
   return (
@@ -33,7 +32,6 @@ const FullPage = () => {
         <ServicesPage/>
         <OurWork/>
         <ProductTestimonials/>
-        <Footer/>
       </div>
     </>
   )

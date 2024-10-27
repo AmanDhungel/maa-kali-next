@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { Navbar } from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",
@@ -29,6 +30,10 @@ const data = [
      title: 'Contact',
      href: '/maa-kali-hardware/contact',
     },
+    {
+     title: 'gallery',
+     href: '/maa-kali-hardware/gallery',
+    },
 ]
   return (
     <html lang="en">
@@ -39,6 +44,7 @@ const data = [
         <Navbar data={data}/>
         </div>
         {children}
+        <Footer/>
       </body>
     </html>
   );

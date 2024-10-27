@@ -1,56 +1,78 @@
 import Image from 'next/image'
 import React from 'react'
+import Banner from './Banner'
+import ImageCard from './ImageCard'
 
 const PhotoGallery = () => {
   return (
     <div>
-<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
-    <div className="grid gap-4">
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/maa-kali-hero.JPG" alt="" width={250} height={250} />
+<div className="h-screen  py-6 sm:py-8 lg:py-12">
+    <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+        <div className="mb-4 -ml-[22rem] flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
+            <Banner title='Gallery' description=' This is a section where we display our work for you to explore and see for yourself,'/>
+
+         
         </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/RO.jpg" alt="" width={250} height={250} />
-        </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/spray.jpg" alt="" width={250} height={250} />
-        </div>
-    </div>
-    <div className="grid gap-4">
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/maa-kali-hero.JPG" alt="" width={250} height={250} />
-        </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/RO.jpg" alt="" width={250} height={250} />
-        </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/spray.jpg" alt="" width={250} height={250} />
-        </div>
-    </div>
-    <div className="grid gap-4">
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/maa-kali-hero.JPG" alt="" width={250} height={250} />
-        </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/RO.jpg" alt="" width={250} height={250} />
-        </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/spray.jpg" alt="" width={250} height={250} />
-        </div>
-    </div>
-    <div className="grid gap-4">
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/maa-kali-hero.JPG" alt="" width={250} height={250} />
-        </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/RO.jpg" alt="" width={250} height={250} />
-        </div>
-        <div>
-            <Image className="h-auto max-w-full rounded-lg" src="/image/spray.jpg" alt="" width={250} height={250} />
+
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+            <a href="#"
+                className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
+                <Image src="/image/door-fittings.jpg" width={500} height={500} loading="lazy" alt="Photo by Maa kali hardware" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                </div>
+
+                {/* <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">VR</span> */}
+            </a>
+           
+            <a href="#"
+                className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
+                <Image src="/image/taps.jpg" width={500} height={500} loading="lazy" alt="Photo by Maa kali hardware" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                </div>
+
+                {/* <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Tech</span> */}
+            </a>
+           
+            <a href="#"
+                className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
+                <Image src="/image/RO.jpg" width={500} height={500} loading="lazy" alt="Photo by Maa kali hardware" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                </div>
+
+                {/* <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Dev</span> */}
+            </a>
+         
+            <a href="#"
+                className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
+                <Image src="/image/maa-kali-hero.JPG" width={500} height={500} loading="lazy" alt="Photo by Maa kali hardware" className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                </div>
+
+                {/* <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Retro</span> */}
+            </a>
         </div>
     </div>
 </div>
-
+<div className='flex gap-[3.9rem] justify-center flex-wrap w-[94rem] m-auto mt-10'>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+<ImageCard/>
+</div>
     </div>
   )
 }
