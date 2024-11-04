@@ -1,6 +1,64 @@
+"use client"
 import React from 'react'
 
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
+
+import { Textarea } from "@/components/ui/textarea"
+
+import { Input } from "@/components/ui/input"
+
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  phonenumber: z.string().min(10).max(10, {
+    message: "Phone number must be exactly 10 characters.",
+  }),
+  subject: z.string().min(2, {
+    message: "Select the subject you want equire about, it cannot be empty.",
+  }),
+  message: z.string().min(20, {
+    message: "message shall be more than 20 characters.",
+  }),
+})
+
 const ContactUs = () => {
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            phonenumber: "",
+            subject: "",
+            message: "",
+        },
+      })
+    
+      console.log(form.getValues())
+      function onSubmit(values: z.infer<typeof formSchema>) {
+        
+        console.log(values)
+      }
+
   return (
     <div>
         <div className="mt-6 max-w-6xl max-lg:max-w-3xl mx-auto bg-[#2e0249] rounded-lg">
@@ -74,32 +132,81 @@ const ContactUs = () => {
                     </ul>
                 </div>
 
-                <div className="bg-gray-100 p-6 rounded-lg">
-                    <p className="text-sm font-semibold text-gray-800">I'm interested in...</p>
+                <div className="bg-gray-100 dark:text-black p-6 rounded-lg">
+                   
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input className="p-6" placeholder="Name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="phonenumber"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone Number</FormLabel>
+              <FormControl>
+                <Input className="p-6" type="number" placeholder="Phone Number" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+    <FormField
+  control={form.control}
+  name="subject"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Subject</FormLabel>
+      <FormControl>
+        <Select onValueChange={field.onChange} value={field.value}>  {/* Bind onValueChange and value */}
+          <SelectTrigger className="w-full p-6">
+            <SelectValue placeholder="Select a subject" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Repair">Repair</SelectItem>
+            <SelectItem value="Plumbing">Plumbing</SelectItem>
+            <SelectItem value="Tiles & Marvel Enquiry">Tiles & Marvel Enquiry</SelectItem>
+            <SelectItem value="Painting">Painting</SelectItem>
+            <SelectItem value="Parqueting">Parqueting</SelectItem>
+            <SelectItem value="Item Enquiry">Item Enquiry</SelectItem>
+            <SelectItem value="Price Enquiry">Price Enquiry</SelectItem>
+            <SelectItem value="Water Leakage">Water Leakage enquiry</SelectItem>
+          </SelectContent>
+        </Select>
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
 
-                    <div className="space-y-4 max-lg:mt-4">
-                        <button type="button" className="px-4 py-2 rounded-lg bg-[#a91079] text-white text-sm tracking-wider font-medium outline-none border-2 border-[#a91079] mr-4">Web design</button>
-                        <button type="button" className="px-4 py-2 rounded-lg bg-transparent text-gray-800 text-sm tracking-wider font-medium outline-none border-2 border-gray-300 mr-4">Graphic design</button>
-                        <button type="button" className="px-4 py-2 rounded-lg bg-transparent text-gray-800 text-sm tracking-wider font-medium outline-none border-2 border-gray-300">Design system</button>
-                    </div>
-
-                    <form className="mt-8 space-y-4">
-                        <input type='text' placeholder='Name'
-                            className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]" />
-                        <input type='email' placeholder='Email'
-                            className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]" />
-                        <input type='text' placeholder='Subject'
-                            className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]" />
-                        <textarea placeholder='Message' rows="6"
-                            className="w-full rounded-lg px-4 text-gray-800 text-sm pt-3 outline-[#a91079]"></textarea>
-                        <button type='button'
-                            className="text-white bg-[#a91079] hover:bg-[#a91079e2] tracking-wide rounded-lg text-sm px-4 py-3 flex items-center justify-center w-full !mt-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill='#fff' className="mr-2" viewBox="0 0 548.244 548.244">
-                                <path fill-rule="evenodd" d="M392.19 156.054 211.268 281.667 22.032 218.58C8.823 214.168-.076 201.775 0 187.852c.077-13.923 9.078-26.24 22.338-30.498L506.15 1.549c11.5-3.697 24.123-.663 32.666 7.88 8.542 8.543 11.577 21.165 7.879 32.666L390.89 525.906c-4.258 13.26-16.575 22.261-30.498 22.338-13.923.076-26.316-8.823-30.728-22.032l-63.393-190.153z" clip-rule="evenodd" data-original="#000000" />
-                            </svg>
-                            Send Message
-                        </button>
-                    </form>
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Your Concern</FormLabel>
+              <FormControl>
+              <Textarea {...field}/>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+                   
                 </div>
             </div>
         </div>

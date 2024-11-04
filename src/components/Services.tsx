@@ -47,10 +47,10 @@ const Services = () => {
   return (
     <>
     <div className="container relative flex flex-col justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10">
-        <Banner title="Services" description="सेवा हरु तल्ल उल्लेखिथ गरियको छ । "/>
+        <Banner title="Services" description="सेवा हरु तल्ल उल्लेखिथ गरियको छ ।"/>
     <div className="flex gap-36">
-        <div className="overflow-hidden">
-        <ServiceAccordion data={data} className="w-[20rem] mr-24"/>
+        <div className="overflow-hidden max-[5rem]">
+        <ServiceAccordion data={data} className="max-w-[15rem] mr-24"/>
         </div>
         <div className="flex flex-col">
       <Image src="/image/maa-kali-hero.JPG" alt="" className="rounded" width={500} height={500} />

@@ -12,9 +12,9 @@ const ContactUs = new mongoose.Schema({
         min:10,
         max:10
     },
-    concern: {
+    subject: {
         type: String,
-        required: [true, 'concern is required'],
+        required: [true, 'subject is required'],
     },
     message: {
         type: String, 
@@ -22,4 +22,6 @@ const ContactUs = new mongoose.Schema({
     },
 })
 
-export const Contact = mongoose.models.ContactUs || mongoose.model('Contact', ContactUs)
+const Contact = mongoose.models.Contact || mongoose.model('Contact', ContactUs)
+
+export default Contact;
