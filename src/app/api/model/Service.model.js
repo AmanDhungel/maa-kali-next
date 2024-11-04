@@ -12,10 +12,12 @@ const ServiceSchema = new mongoose.Schema({
         min:10
     },
     image: {
-        type: String, 
+        type: [String],
         required: [true, 'Image cannot be empty'],
         min:10
     },
 })
 
-export const ServiceModel = mongoose.models.ServiceSchema || mongoose.model('Service', ServiceSchema)
+const Service = mongoose.models.Service || mongoose.model('Service', ServiceSchema)
+
+export default Service
