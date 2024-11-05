@@ -5,10 +5,11 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
+import { useMutation } from 'react-query';
+import axios from 'axios';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,39 +26,12 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 
 import { Input } from "@/components/ui/input"
+import { useContact } from '@/modules/hook.contact'
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  phonenumber: z.string().min(10).max(10, {
-    message: "Phone number must be exactly 10 characters.",
-  }),
-  subject: z.string().min(2, {
-    message: "Select the subject you want equire about, it cannot be empty.",
-  }),
-  message: z.string().min(20, {
-    message: "message shall be more than 20 characters.",
-  }),
-})
+
 
 const ContactUs = () => {
-
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            phonenumber: "",
-            subject: "",
-            message: "",
-        },
-      })
-    
-      console.log(form.getValues())
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        
-        console.log(values)
-      }
+  const {form, onSubmit} = useContact();
 
   return (
     <div>
@@ -190,6 +164,7 @@ const ContactUs = () => {
   )}
 />
 
+
         <FormField
           control={form.control}
           name="message"
@@ -206,7 +181,6 @@ const ContactUs = () => {
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-                   
                 </div>
             </div>
         </div>

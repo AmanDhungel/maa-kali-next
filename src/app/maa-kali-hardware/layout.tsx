@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Provider from "@/lib/query-client-provider";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",
@@ -43,7 +44,9 @@ const data = [
         <div className="p-8 flex justify-center">
         <Navbar data={data}/>
         </div>
+        <Provider>
         {children}
+        </Provider>
         <Footer/>
       </body>
     </html>

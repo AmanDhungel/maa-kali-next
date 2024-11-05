@@ -4,13 +4,13 @@ const ContactUs = new mongoose.Schema({
     name: {
         type: String, 
         required: [true, 'Title cannot be empty'],
-        min:10
+        minLength: 10
     },
     phonenumber: {
-        type: String | Number, 
+        type: String, 
         required: [true, 'number is required'],
-        min:10,
-        max:10
+        minLength: 10,
+        maxLength: 10
     },
     subject: {
         type: String,
@@ -20,8 +20,8 @@ const ContactUs = new mongoose.Schema({
         type: String, 
         required: [true, 'Message cannot be empty'],
     },
-})
+});
 
-const Contact = mongoose.models.Contact || mongoose.model('Contact', ContactUs)
+const Contact = mongoose.models.Contact || mongoose.model('Contact', ContactUs);
 
 export default Contact;

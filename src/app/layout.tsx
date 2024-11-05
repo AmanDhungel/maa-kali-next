@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import Provider from "@/lib/query-client-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,10 +15,10 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "Maa Kali Hardware X National Home Decor",
-  description: "Hardware near you, Construction company, Maa Kali Hardware",
-};
+// export const metadata: Metadata = {
+//   title: "Maa Kali Hardware X National Home Decor",
+//   description: "Hardware near you, Construction company, Maa Kali Hardware",
+// };
 
 export default function RootLayout({
   children,
@@ -29,7 +31,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Provider>
+          {children}
+        </Provider>
+        <Toaster />
       </body>
     </html>
   );
