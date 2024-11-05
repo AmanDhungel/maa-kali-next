@@ -15,7 +15,6 @@ import {
       <Accordion type="single" collapsible className={`${className} w-full`}>
         {data?.map((item, index) => (
         <AccordionItem value={`item-${index}`} key={index}>
-            
           <AccordionTrigger>
             {item?.title}
          </AccordionTrigger>

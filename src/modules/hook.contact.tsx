@@ -46,6 +46,7 @@ const onSubmit = () => {
             console.log(val);
             form.reset();
             toast({
+                variant:"success",
                 title: "Message sent successfully",
             });
         },
