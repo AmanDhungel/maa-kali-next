@@ -1,4 +1,3 @@
-import DarkModeToggle from "@/components/DarkMode";
 import { Navbar } from "@/components/Navbar";
 import { CardDemo } from "@/components/shadcnCard";
 import { ArrowBigDown } from "lucide-react";
@@ -36,10 +35,12 @@ export default function Home() {
   ]
   return (
     <>
+    <div className="flex justify-center mt-4">
+    <Navbar/>
+    </div>
     <div className="flex flex-col items-center justify-center gap-4 mt-32">
     <h1 className="text-3xl">Select One To <span className="underline underline-offset-8 font-bold animate-pulse tracking-[0.18rem]">Visit!</span></h1>
     <ArrowBigDown className="w-10 h-10 font-bold animate-bounce"/>
-    <Navbar/>
     </div>
     <div className="flex items-center justify-center gap-4 mt-24">
       <Link href='/maa-kali-hardware'>
