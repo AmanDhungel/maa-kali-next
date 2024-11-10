@@ -14,10 +14,12 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useAuth } from "@/services/login.service"
+import { toast } from "@/hooks/use-toast"
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  email: z.string().min(2, {
+    message: "email is required",
   }),
   password: z.string().min(2, {
     message: "password must be at least 7 characters.",
@@ -29,14 +31,40 @@ export function LoginPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
+      password: "",
     },
   })
 
+ const {mutate} = useAuth()
   
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-  }
+
+  const onSubmit = (data) => {
+    // Add the quill value to the data
+
+    console.log('form values from submit',form.getValues());
+
+    const payload = {...form.getValues()};
+     
+    mutate(payload, {
+      onSuccess: (val) => {
+          console.log(val);
+          form.reset();
+          toast({
+              variant:"success",
+              title: "logged in successfully",
+          });
+      },
+      onError: (err) => {
+          console.log('error', err);
+          toast({
+            variant:"destructive",
+            title: err.response.data.message ? err.response.data.message : err.message,
+        });
+      },
+  });
+}
+
 
   return (
     <div className="flex flex-col w-[30rem] m-auto mt-10">
@@ -45,12 +73,12 @@ export function LoginPage() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input className="p-6" placeholder="Username" {...field} />
+                <Input className="p-6" placeholder="Email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

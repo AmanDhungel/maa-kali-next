@@ -16,20 +16,13 @@ import { Input } from "@/components/ui/input"
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CldUploadButton } from 'next-cloudinary';
+import { useCreateBlog } from '@/services/blog.service';
+import { toast } from '@/hooks/use-toast';
  
 
 const BackendBlog = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm();
-  const [quillValue, setQuillValue] = useState("");
-  const [image, setImage] = useState([]);
-
-  console.log(image)
-  // Handling form submission
-  const onSubmit = (data) => {
-    // Add the quill value to the data
-    data.content = quillValue;
-    console.log(data); // Handle form data, e.g., send to API
-  };
+  const { handleSubmit } = useForm();
+  const {mutate} = useCreateBlog();
 
   const formSchema = z.object({
     title: z.string().min(2, {
@@ -38,29 +31,66 @@ const BackendBlog = () => {
     shortDescription: z.string().min(10).max(10, {
       message: "Phone number must be exactly 10 characters.",
     }),
-    Image: z.string().min(2, {
+    Image: z.array(z.string()).min(1, {
       message: "Select the subject you want equire about, it cannot be empty.",
     }),
-    message: z.string().min(20, {
-      message: "message shall be more than 20 characters.",
+    description: z.string().min(20, {
+      message: "description shall be more than 20 characters.",
     }),
   })
 
- const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
         title: "",
         shortDescription: "",
-        Image: "",
+        description: "",
+        Image: [],
     },
   })
+
+  console.log('form error', form.formState.errors);
+
+  // Handling form submission
+  const onSubmit = () => {
+    // Add the quill value to the data
+
+    console.log('form values from submit',form.getValues());
+
+    const payload = {...form.getValues()};
+     
+    mutate(payload, {
+      onSuccess: (val) => {
+          console.log(val);
+          form.reset();
+          toast({
+              variant:"success",
+              title: "Blog Created successfully",
+          });
+      },
+      onError: (err) => {
+          console.log('error', err);
+          toast({
+            variant:"destructive",
+            title: err.response.data.message? err.response.data.message  : err.message,
+        });
+      },
+  });
+
+
+  };
+
+
+
+
+
 
   return (
     <div className='w-[50rem] flex flex-col justify-center mt-10 m-auto gap-4  '> 
     <Form {...form}>
     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
       <FormField
-        control={control}
+        control={form.control}
         name="title"
         render={({ field }) => (
           <FormItem>
@@ -74,7 +104,7 @@ const BackendBlog = () => {
       />
 
       <FormField
-        control={control}
+        control={form.control}
         name="shortDescription"
         render={({ field }) => (
           <FormItem>
@@ -87,14 +117,14 @@ const BackendBlog = () => {
         )}
       />
       <FormField
-        control={control}
+        control={form.control}
         name="Image"
         render={({ field }) => (
           <FormItem className='flex flex-col'>
             <FormLabel>Image</FormLabel>
             <FormControl>
               <Button variant="secondary" className='w-[10rem]' onClick={(e) => e.preventDefault()} >
-               <CldUploadButton uploadPreset="njqfzuge" {...field} onSuccess={(result) => setImage((prev) => [...prev, result.info.url] )}/>
+               <CldUploadButton uploadPreset="njqfzuge" {...field} onSuccess={(result) => form.setValue('Image', [...form.getValues().Image, result.info.url] )} className='w-full'/>
               </Button>
             </FormControl>
             <FormMessage />
@@ -107,8 +137,7 @@ const BackendBlog = () => {
         <FormLabel>Content</FormLabel>
         <ReactQuill
           theme="snow"
-          value={quillValue}
-          onChange={(content) => setQuillValue(content)} // Track value changes
+          onChange={(content) => form.setValue('description', content)} // Track value changes
         />
        <FormMessage/>
       </FormItem>

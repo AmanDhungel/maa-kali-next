@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     return new Response(
-      JSON.stringify({ message: "Internal Server Error", error: error }),
+      JSON.stringify({ message: "Could not login", error: error }),
       { status: 500 }
     );
   }

@@ -1,13 +1,12 @@
 'use client'
 
 import { useMutation } from "@tanstack/react-query"
-import { useMutator } from "./generic.service"
 import axios from "axios"
 
 export const useCreateContact = () => {
     return useMutation<void> ({
         mutationFn: async (data) =>{
-            const res = await axios.post("http://localhost:3000/api/contact", data)
+            const res = await axios.post("/api/contact", data)
             return res.data
         }
     }) 
