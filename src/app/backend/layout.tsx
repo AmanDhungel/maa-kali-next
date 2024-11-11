@@ -23,6 +23,10 @@ const data = [
      title: 'Add Photos to Gallery',
      href: '/backend/gallery',
     },
+    {
+     title: 'Add serives',
+     href: '/backend/service',
+    },
     ]
   return (
     <html lang="en">
