@@ -16,13 +16,17 @@ import { Input } from "@/components/ui/input"
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CldUploadButton } from 'next-cloudinary';
-import { useCreateBlog } from '@/services/blog.service';
+import { useCreateBlog, useGetBlog } from '@/services/blog.service';
 import { toast } from '@/hooks/use-toast';
+import { TableDemo } from './ui/tableComponent';
+import { query } from 'express';
+import { useQueryClient } from '@tanstack/react-query';
  
 
 const BackendBlog = () => {
   const { handleSubmit } = useForm();
   const {mutate} = useCreateBlog();
+  const queryClient = useQueryClient();
 
   const formSchema = z.object({
     title: z.string().min(2, {
@@ -31,7 +35,7 @@ const BackendBlog = () => {
     shortDescription: z.string().min(10).max(10, {
       message: "Phone number must be exactly 10 characters.",
     }),
-    Image: z.array(z.string()).min(1, {
+    image: z.array(z.string()).min(1, {
       message: "Select the subject you want equire about, it cannot be empty.",
     }),
     description: z.string().min(20, {
@@ -45,7 +49,7 @@ const BackendBlog = () => {
         title: "",
         shortDescription: "",
         description: "",
-        Image: [],
+        image: [],
     },
   })
 
@@ -54,12 +58,15 @@ const BackendBlog = () => {
   const onSubmit = () => {
     // Add the quill value to the data
 
-    console.log('form values from submit',form.getValues());
 
     const payload = {...form.getValues()};
      
     mutate(payload, {
       onSuccess: (val) => {
+        // queryClient.invalidateQueries('blog');
+        queryClient.invalidateQueries({
+          queryKey: ['blog'],
+        });
           console.log(val);
           form.reset();
           toast({
@@ -79,6 +86,10 @@ const BackendBlog = () => {
 
   };
 
+  console.log('form values from submit',form.getValues());
+
+ const {data} = useGetBlog();
+ console.log('data', data);
 
 
 
@@ -117,13 +128,13 @@ const BackendBlog = () => {
       />
       <FormField
         control={form.control}
-        name="Image"
+        name="image"
         render={({ field }) => (
           <FormItem className='flex flex-col'>
             <FormLabel>Image</FormLabel>
             <FormControl>
               <Button variant="secondary" className='w-[10rem]' onClick={(e) => e.preventDefault()} >
-               <CldUploadButton uploadPreset="njqfzuge" {...field} onSuccess={(result) => form.setValue('Image', [...form.getValues().Image, result.info.url] )} className='w-full'/>
+               <CldUploadButton uploadPreset="njqfzuge" {...field} onSuccess={(result) => form.setValue('image', [...form.getValues().image, result.info.url] )} className='w-full'/>
               </Button>
             </FormControl>
             <FormMessage />
@@ -144,6 +155,8 @@ const BackendBlog = () => {
       <Button type="submit" className='mt-4'>Submit</Button>
     </form>
     </Form>
+
+    <TableDemo data={data} tableCap="Blog" tableHead={["Image", "Title", "Short Description" , "Description", 'actions']}/>
     </div>
 
   )

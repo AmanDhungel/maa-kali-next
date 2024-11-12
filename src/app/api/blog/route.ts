@@ -22,6 +22,7 @@ export async function POST(req: Request) {
 
 export async function GET() {
     try {
+        await connectDB();
         const blog = await Blog.find();
         return new Response(JSON.stringify(blog), {  status: 200 });
     } catch (error) {
