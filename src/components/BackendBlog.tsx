@@ -49,7 +49,6 @@ const BackendBlog = () => {
     },
   })
 
-  console.log('form error', form.formState.errors);
 
   // Handling form submission
   const onSubmit = () => {

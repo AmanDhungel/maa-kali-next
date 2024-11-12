@@ -11,11 +11,7 @@ const ServiceSchema = new mongoose.Schema({
         required: [true, 'Description cannot be empty'],
         min:10
     },
-    image: {
-        type: [String],
-        required: [true, 'Image cannot be empty'],
-        min:10
-    },
+  
 })
 
 const Service = mongoose.models.Service || mongoose.model('Service', ServiceSchema)

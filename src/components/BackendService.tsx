@@ -16,11 +16,16 @@ import { Input } from "@/components/ui/input"
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from '@/hooks/use-toast';
+import { useCreateService, useGetService } from '@/services/service.service';
  
 
 
 const BackendService = () => {
     const { handleSubmit } = useForm();
+    const{ mutate } = useCreateService()
+    const {data} = useGetService();
+
+    console.log(data);
 
     const formSchema = z.object({
         title: z.string().min(2, {
@@ -40,20 +45,16 @@ const BackendService = () => {
         },
       })
 
-      const onSubmit = () => {
-        // Add the quill value to the data
-    
-        console.log('form values from submit',form.getValues());
-    
+      const onSubmit = () => {        
         const payload = {...form.getValues()};
-         
+    
         mutate(payload, {
           onSuccess: (val) => {
               console.log(val);
               form.reset();
               toast({
                   variant:"success",
-                  title: "Blog Created successfully",
+                  title: "service Created successfully",
               });
           },
           onError: (err) => {
@@ -83,12 +84,13 @@ const BackendService = () => {
           </FormItem>
         )}
       />
-      
+
       <FormItem>
         <FormLabel>Content</FormLabel>
         <ReactQuill
           theme="snow"
-          onChange={(content) => form.setValue('description', content)} // Track value changes
+          value={form.getValues('description')}
+          onChange={(content) => form.setValue('description', content)} 
         />
        <FormMessage/>
       </FormItem>

@@ -37,3 +37,14 @@ export async function POST(req: Request) {
         });
     }
 }
+
+
+export async function GET() {
+    try {
+        const contact = await Contact.find();
+        return new Response(JSON.stringify(contact), {  status: 200 });
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({ message: "Something went wrong while getting contact", error }), { status: 500 });
+    }
+}   
