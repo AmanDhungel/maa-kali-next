@@ -17,15 +17,15 @@ export default function RootLayout({
 const data = [
     {
      title: 'Add Blog',
-     href: '/backend/blog',
+     href: '/admin/blog',
     },
     {
      title: 'Add Photos to Gallery',
-     href: '/backend/gallery',
+     href: '/admin/gallery',
     },
     {
      title: 'Add serives',
-     href: '/backend/service',
+     href: '/admin/service',
     },
     ]
   return (

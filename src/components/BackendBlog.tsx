@@ -155,10 +155,10 @@ const BackendBlog = () => {
       <Button type="submit" className='mt-4'>Submit</Button>
     </form>
     </Form>
-
-    <TableDemo data={data} tableCap="Blog" tableHead={["Image", "Title", "Short Description" , "Description", 'actions']}/>
+      <div className='mt-10'>
+        <TableDemo data={data} tableCap="Blog" tableHead={["Image", "Title", "Short Description" , "Description", 'actions']}/>
+      </div>
     </div>
-
   )
 }
 

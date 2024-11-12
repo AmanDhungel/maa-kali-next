@@ -8,10 +8,7 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { Eraser, Trash2 } from "lucide-react";
-import Image from "next/image";
-  
- 
-  
+    
   export function TableDemo({data, ...props}) {
     console.log('data from table', data);
     return (
@@ -23,9 +20,6 @@ import Image from "next/image";
             <TableHead key={index} className={index === props.tableHead.length - 1 ? "text-right" : ``}>{data}</TableHead>
           )} 
 
-            {/* <TableHead>{props.tableHead2}</TableHead>
-            <TableHead>{props.tableHead3}</TableHead>
-            <TableHead className="text-right">{props.tableHead4}</TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,4 +51,3 @@ import Image from "next/image";
       </Table>
     )
   }
-  
