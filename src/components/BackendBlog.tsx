@@ -25,7 +25,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 const BackendBlog = () => {
   const { handleSubmit } = useForm();
-  const {mutate} = useCreateBlog();
+  const { mutate } = useCreateBlog();
   const queryClient = useQueryClient();
 
   const formSchema = z.object({
@@ -54,16 +54,10 @@ const BackendBlog = () => {
   })
 
 
-  // Handling form submission
   const onSubmit = () => {
-    // Add the quill value to the data
-
-
     const payload = {...form.getValues()};
-     
     mutate(payload, {
       onSuccess: (val) => {
-        // queryClient.invalidateQueries('blog');
         queryClient.invalidateQueries({
           queryKey: ['blog'],
         });
@@ -89,7 +83,6 @@ const BackendBlog = () => {
   console.log('form values from submit',form.getValues());
 
  const {data} = useGetBlog();
- console.log('data', data);
 
 
 
@@ -155,9 +148,11 @@ const BackendBlog = () => {
       <Button type="submit" className='mt-4'>Submit</Button>
     </form>
     </Form>
+
       <div className='mt-10'>
         <TableDemo data={data} tableCap="Blog" tableHead={["Image", "Title", "Short Description" , "Description", 'actions']}/>
       </div>
+
     </div>
   )
 }

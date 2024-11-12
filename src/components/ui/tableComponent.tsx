@@ -10,7 +10,7 @@ import {
 import { Eraser, Trash2 } from "lucide-react";
     
   export function TableDemo({data, ...props}) {
-    console.log('data from table', data);
+
     return (
       <Table className="overflow-hidden">
         <TableCaption>{props.tableCap}</TableCaption>
@@ -25,7 +25,9 @@ import { Eraser, Trash2 } from "lucide-react";
         <TableBody>
           {data?.map((tableData) => (
             <TableRow key={tableData._id}>
-              <TableCell className="font-medium"><img src={tableData.image[0]} alt="logo" width={40} height={40}/></TableCell>
+              <TableCell className="font-medium">
+                <img src={tableData.image[0]} alt="logo" width={40} height={40}/>
+              </TableCell>
               <TableCell>{tableData.title}</TableCell>
               <TableCell>{tableData.shortDescription}</TableCell>
               <TableCell  dangerouslySetInnerHTML={{__html: tableData.description}}></TableCell>
@@ -37,7 +39,7 @@ import { Eraser, Trash2 } from "lucide-react";
                     </span>
                     </div>
                 </TableCell>
-                <TableCell>
+                <TableCell onClick={props.handleOnDelete(data._id)}>
                     <div className="relative group cursor-pointer">
                     <Trash2/>
                     <span className="absolute z-50 left-1/2 transform -translate-x-[25px] mt-2 w-max bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100">

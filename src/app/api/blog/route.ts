@@ -30,3 +30,15 @@ export async function GET() {
         return new Response(JSON.stringify({ message: "Something went wrong", error }), { status: 500 });
     }
 }
+
+export async function DELETE(req: Request) {
+    try {
+        await connectDB();
+        const {id} = await req.json();
+        const blog = await Blog.findByIdAndDelete(id);
+        return new Response(JSON.stringify({message: "Blog Deleted Successfully"}, blog), {  status: 200 });
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({ message: "Something went wrong", error }), { status: 500 });
+    }
+}
