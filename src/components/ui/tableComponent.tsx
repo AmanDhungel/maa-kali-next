@@ -58,7 +58,7 @@ import { CarouselDemo } from "../Carousel";
            {data?.map((tableData) => (
             <TableRow key={tableData._id}>
               <TableCell className="font-medium">
-                {tableData.image.length > 1 ? <CarouselDemo item={tableData.image} /> : <img src={tableData.image[0]} alt="logo" className="p-4" width={150} height={40}/>}
+                <CarouselDemo item={tableData.image} /> 
               </TableCell>
               <TableCell>{tableData.title}</TableCell>
               <TableCell>{tableData.shortDescription}</TableCell>

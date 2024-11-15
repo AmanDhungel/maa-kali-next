@@ -29,8 +29,8 @@ export function CarouselDemo({item}: {item : string[]}) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselNext className="mr-10 "/>
-      <CarouselPrevious className="ml-10"/>
+   {item?.length > 1 &&   <CarouselNext className="mr-10 "/>}
+   {item?.length > 1 &&    <CarouselPrevious className="ml-10"/>}
     </Carousel>
   )
 }
