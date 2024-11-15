@@ -12,6 +12,7 @@ import { useDeleteBlog } from "@/services/blog.service";
 import { useQueryClient } from "@tanstack/react-query";
 import { Eraser, Trash2 } from "lucide-react";
 import AlertDailog from "../AlertDailog";
+import { CarouselDemo } from "../Carousel";
     
   export function TableDemo({data, ...props}) {
     const queryClient = useQueryClient();
@@ -57,7 +58,7 @@ import AlertDailog from "../AlertDailog";
            {data?.map((tableData) => (
             <TableRow key={tableData._id}>
               <TableCell className="font-medium">
-                <img src={tableData.image[0]} alt="logo" width={40} height={40}/>
+                {tableData.image.length > 1 ? <CarouselDemo item={tableData.image} /> : <img src={tableData.image[0]} alt="logo" className="p-4" width={150} height={40}/>}
               </TableCell>
               <TableCell>{tableData.title}</TableCell>
               <TableCell>{tableData.shortDescription}</TableCell>
