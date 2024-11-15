@@ -23,9 +23,9 @@ export const useCreateBlog = () => {
 
 export const useDeleteBlog = () => {
     return useMutation<void> ({
-        mutationFn: async (id) =>{
-            const res = await axios.delete("/api/blog", id);
-            return res.data
+        mutationFn: async (_id) =>{
+            const res = await axios.delete(`/api/blog/${_id}`);
+            return res.data;
         }
     }) 
 }

@@ -5,17 +5,17 @@ const BlogSchema = new mongoose.Schema({
     title: {
         type: String, 
         required: [true, 'Title cannot be empty'],
-        minLength: 10
+        minLength: 1
     },
     shortDescription: {
         type: String, 
         required: [true, 'Short Description cannot be empty'],
-        minLength: 10
+        minLength: 1
     },
     description: {
         type: String, 
         required: [true, 'Description cannot be empty'],
-        minLength: 10
+        minLength: 1
     },
     image: {
         type: [], 
