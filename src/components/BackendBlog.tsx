@@ -82,7 +82,7 @@ const BackendBlog = () => {
 
   console.log('form values from submit',form.getValues());
 
- const {data} = useGetBlog();
+ const {data, isFetching} = useGetBlog();
 
 
 
@@ -149,8 +149,8 @@ const BackendBlog = () => {
     </form>
     </Form>
 
-      <div className='mt-10'>
-        <TableDemo data={data} tableCap="Blog" tableHead={["Image", "Title", "Short Description" , "Description", 'actions']}/>
+      <div className='min-w-[80%]'>
+        <TableDemo data={data} tableCap={`${isFetching ? "Loading..." : "All Blogs"}`} tableHead={["Image", "Title", "Short Description" , "Description", 'actions']}/>
       </div>
 
     </div>

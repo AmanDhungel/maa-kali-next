@@ -41,14 +41,13 @@ import { CarouselDemo } from "../Carousel";
     };
 
     return ( 
-      <Table className="overflow-hidden">
+      <Table className="">
         <TableCaption>{!data || data?.length < 1 ? "No Data Found" : props.tableCap}</TableCaption>
         <TableHeader>
           <TableRow>
           {props.tableHead.map((data, index) => 
             <TableHead key={index} className={index === props.tableHead.length - 1 ? "text-right" : ``}>{data}</TableHead>
           )} 
-           
           </TableRow>
         </TableHeader>
         <TableBody>

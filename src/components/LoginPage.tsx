@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useAuth } from "@/services/login.service"
 import { toast } from "@/hooks/use-toast"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -27,7 +27,6 @@ const formSchema = z.object({
 })
 
 export function LoginPage() {
-  // ...
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,24 +35,22 @@ export function LoginPage() {
     },
   })
 
- const {mutate} = useAuth()
+ const { mutate } = useAuth();
+
+ const router = useRouter();
   
 
   const onSubmit = (data) => {
-    // Add the quill value to the data
-
-    console.log('form values from submit',form.getValues());
-
     const payload = {...form.getValues()};
      
     mutate(payload, {
-      onSuccess: (val) => {
-          console.log(val);
+      onSuccess: () => {
           form.reset();
           toast({
               variant:"success",
               title: "logged in successfully",
           });
+          return router.push('/admin/blog')
       },
       onError: (err) => {
           console.log('error', err);

@@ -21,8 +21,6 @@ export async function POST(req: Request) {
             });
         }
 
-        console.log('contact', name);
-
         // Save the contact message
         const contact = new Contact({ name, phonenumber, message, subject });
         await contact.save();
