@@ -54,7 +54,7 @@ const BackendService = () => {
               form.reset();
               toast({
                   variant:"success",
-                  title: "service Created successfully",
+                  title: "Service Created successfully",
               });
           },
           onError: (err) => {
@@ -76,7 +76,7 @@ const BackendService = () => {
         name="title"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Blog Title</FormLabel>
+            <FormLabel>Service Title</FormLabel>
             <FormControl>
               <Input placeholder="Title" className='py-4' {...field} />
             </FormControl>

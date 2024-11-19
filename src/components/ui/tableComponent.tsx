@@ -30,6 +30,7 @@ import { CarouselDemo } from "../Carousel";
             title: val.message,
           });
         },
+
         onError: (err) => {
           console.log("error", err);
           toast({
@@ -41,7 +42,7 @@ import { CarouselDemo } from "../Carousel";
     };
 
     return ( 
-      <Table className="">
+      <Table className="w-1000px overflow-hidden">
         <TableCaption>{!data || data?.length < 1 ? "No Data Found" : props.tableCap}</TableCaption>
         <TableHeader>
           <TableRow>
@@ -50,24 +51,24 @@ import { CarouselDemo } from "../Carousel";
           )} 
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="w-full text-wrap">
           {/* {!data && data?.length < 1 ?
            "No Data Found"
           :  */}
            {data?.map((tableData) => (
-            <TableRow key={tableData._id}>
+            <TableRow key={tableData._id} className="text-wrap w-10">
               <TableCell className="font-medium">
                 <CarouselDemo item={tableData.image} /> 
               </TableCell>
-              <TableCell>{tableData.title}</TableCell>
-              <TableCell>{tableData.shortDescription}</TableCell>
-              <TableCell  dangerouslySetInnerHTML={{__html: tableData.description}}></TableCell>
+              <TableCell className="w-10 text-wrap"><p className="w-32 overflow-hidden overflow-ellipsis">{tableData.title}</p></TableCell>
+              <TableCell><p className="w-32 overflow-hidden overflow-ellipsis">{tableData.shortDescription}</p></TableCell>
+              <TableCell  ><p className="w-32 overflow-hidden overflow-ellipsis" dangerouslySetInnerHTML={{__html: tableData.description}}></p></TableCell>
                 <TableCell>
                     <div className="relative group cursor-pointer">
                     <Eraser />
-                    <span className="absolute left-1/2 transform -translate-x-[70%] mt-2 w-max bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100">
-                        Edit
-                    </span>
+                      <span className="absolute left-1/2 transform -translate-x-[70%] mt-2 w-max bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100">
+                          Edit
+                      </span>
                     </div>
                 </TableCell>
                 <TableCell 

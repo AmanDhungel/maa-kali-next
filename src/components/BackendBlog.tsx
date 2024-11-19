@@ -149,7 +149,7 @@ const BackendBlog = () => {
     </form>
     </Form>
 
-      <div className='min-w-[80%]'>
+      <div className='w-full overflow-hidden'>
         <TableDemo data={data} tableCap={`${isFetching ? "Loading..." : "All Blogs"}`} tableHead={["Image", "Title", "Short Description" , "Description", 'actions']}/>
       </div>
 
