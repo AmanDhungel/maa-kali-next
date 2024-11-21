@@ -20,6 +20,6 @@ export async function verifyToken(req: NextRequest) {
       return payload; // Successfully verified
     } catch (error) {
       console.error('Token verification failed:', error);
-      throw new Error('Invalid token');
+      // throw new Error('Invalid token');
     }
 }
