@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const gallery = new mongoose.Schema({
+const gallerySchema = new mongoose.Schema({
     image: {
         type: [String], 
         required: [true, 'Title cannot be empty'],
@@ -8,6 +8,7 @@ const gallery = new mongoose.Schema({
     },
 });
 
-const Gallery = mongoose.models.gallery || mongoose.model('Gallery', gallery);
+const Gallery = mongoose.models.Gallery || mongoose.model('Gallery', gallerySchema);
 
 export default Gallery;
+

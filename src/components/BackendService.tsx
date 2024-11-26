@@ -59,10 +59,10 @@ const BackendService = () => {
                   variant:"success",
                   title: "Service Created successfully",
               });
-
+              
               queryClient.invalidateQueries({
-                queryKey: ["service"],
-              });
+                predicate: query => query.queryKey[0] === 'service',
+              })
           },
           onError: (err) => {
               console.log('error', err);

@@ -1,9 +1,18 @@
+'use client'
 import Image from 'next/image'
 import React from 'react'
 import Banner from './Banner'
 import ImageCard from './ImageCard'
+import { useGetGallery } from '@/services/gallery.service'
+import { Loader2 } from 'lucide-react'
+import { Carousel } from './ui/carousel'
+import { CarouselDemo } from './Carousel'
 
 const PhotoGallery = () => {
+
+   const {data, isLoading} = useGetGallery()
+
+   console.log('data', data);
   return (
     <div>
 <div className="h-screen  py-6 sm:py-8 lg:py-12">
@@ -60,17 +69,17 @@ const PhotoGallery = () => {
         </div>
     </div>
 </div>
-<div className='flex gap-[3.9rem] justify-center flex-wrap w-[94rem] m-auto mt-10'>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
-<ImageCard/>
+<div className='flex gap-[3.9rem] justify-center flex-wrap w-[94rem] m-auto my-20'>
+{isLoading ? <div className='flex justify-center'><Loader2 className='animate-spin'/> loading</div> :
+data?.map((item) =>{ 
+console.log('item', item.image)
+return(<CarouselDemo
+item={item?.image}
+imageClassName='w-[20rem] h-[30rem] object-cover'
+key={item._id}
+className="card__image w-[20rem] h-[30rem] "
+/>
+)})}
 </div>
     </div>
   )

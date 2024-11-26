@@ -3,9 +3,10 @@ import Image from "next/image"
 import Banner from "./Banner"
 import { ServiceAccordion } from "./Accordian"
 import { useGetService } from "@/services/service.service";
+import {  Loader2 } from "lucide-react";
 
 const Services = () => {
-    const {data: serviceData} = useGetService();
+    const {data: serviceData, isFetching} = useGetService();
 
   
 
@@ -15,7 +16,7 @@ const Services = () => {
         <Banner title="Services" description="सेवा हरु तल्ल उल्लेखिथ गरियको छ ।"/>
     <div className="flex gap-36">
         <div className="overflow-hidden max-w-[20rem]">
-        <ServiceAccordion data={serviceData} className="max-w-[15rem] mr-24"/>
+        {isFetching ? <p className="flex gap-3"><Loader2 className="animate-spin"/> Loading...</p> :<ServiceAccordion data={serviceData} className="max-w-[15rem] mr-24"/>}
         </div>
         <div className="flex flex-col">
       <Image src="/image/maa-kali-hero.JPG" alt="" className="rounded" width={500} height={500} />

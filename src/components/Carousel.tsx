@@ -15,7 +15,7 @@ export function CarouselDemo({item, className, imageClassName}: {item : string[]
   return (
     <Carousel className={`w-[150px] max-w-xs h-full ${className}`}>
       <CarouselContent className="h-full">
-        {item.map((items, index) => (
+        {item?.map((items, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
               <Card>
