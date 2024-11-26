@@ -8,23 +8,23 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { toast } from "@/hooks/use-toast";
-import { useDeleteBlog } from "@/services/blog.service";
 import { useQueryClient } from "@tanstack/react-query";
 import { Eraser, Trash2 } from "lucide-react";
 import AlertDailog from "../AlertDailog";
-import { CarouselDemo } from "../Carousel";
+import { useDeleteService } from "@/services/service.service";
     
-  export function TableDemo({data, ...props}) {
+  export function ServiceTable({data, ...props}) {
     const queryClient = useQueryClient();
     
-    const{mutate} = useDeleteBlog();
+    const{mutate} = useDeleteService();
 
-    const handleDelete = (id) => {
+    const handleDelete = (id : string) => {
       mutate(id, {
         onSuccess: (val) => {
           queryClient.invalidateQueries({
-            queryKey: ["blog"],
+            queryKey: ["service"],
           });
+          console.log('value' ,val)
           toast({
             variant: "success",
             title: val.message,
@@ -47,7 +47,7 @@ import { CarouselDemo } from "../Carousel";
         <TableHeader>
           <TableRow>
           {props.tableHead.map((data, index) => 
-            <TableHead key={index} className={index === props.tableHead.length - 1 ? "text-right" : ``}>{data}</TableHead>
+            <TableHead key={index} >{data}</TableHead>
           )} 
           </TableRow>
         </TableHeader>
@@ -57,23 +57,16 @@ import { CarouselDemo } from "../Carousel";
           :  */}
            {data?.map((tableData) => (
             <TableRow key={tableData._id} className="text-wrap w-10">
-              <TableCell className="font-medium">
-              {tableData.image?.length > 1  && <CarouselDemo item={tableData.image} />} 
-              </TableCell>
-              <TableCell className="w-10 text-wrap"><p className="w-32 overflow-hidden overflow-ellipsis">{tableData.title}</p></TableCell>
-              <TableCell><p className="w-32 overflow-hidden overflow-ellipsis h-10 flex items-center">{tableData.shortDescription}</p></TableCell>
-              <TableCell  ><p className="flex justify-center items-center w-32 h-10 overflow-hidden overflow-ellipsis" dangerouslySetInnerHTML={{__html: tableData.description}}></p></TableCell>
-                <TableCell>
-                    <div className="relative group cursor-pointer">
+              <TableCell className="w-[10rem] text-wrap"><p className="w-[12rem] overflow-hidden overflow-ellipsis">{tableData.title}</p></TableCell>
+              <TableCell  ><p className="flex w-[18rem] h-10 overflow-hidden overflow-ellipsis items-center " dangerouslySetInnerHTML={{__html: tableData.description}}></p></TableCell>
+                <TableCell className="flex items-center gap-2">
+                    <div className="flex gap-2 items-center">
                     <Eraser />
                       <span className="absolute left-1/2 transform -translate-x-[70%] mt-2 w-max bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100">
                           Edit
                       </span>
                     </div>
-                </TableCell>
-                <TableCell 
-                    >
-                    <div className="relative group cursor-pointer">
+                      <div className="relative group cursor-pointer">
                     <AlertDailog title="delete this data" 
                     text={<Trash2 />}
                      onContinue={() =>

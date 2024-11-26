@@ -11,9 +11,9 @@ import {
 import Image from "next/image"
 
 
-export function CarouselDemo({item}: {item : string[]}) {
+export function CarouselDemo({item, className, imageClassName}: {item : string[], className? : string, imageClassName? : string}) {
   return (
-    <Carousel className="w-[150px] max-w-xs h-full">
+    <Carousel className={`w-[150px] max-w-xs h-full ${className}`}>
       <CarouselContent className="h-full">
         {item.map((items, index) => (
           <CarouselItem key={index}>
@@ -21,7 +21,7 @@ export function CarouselDemo({item}: {item : string[]}) {
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
                   <span className="text-4xl font-semibold">{
-                    <img src={items} alt="sds" width={100} height={100} />
+                    <img src={items} alt="sds" width={100} height={100} className={imageClassName} />
                     }</span>
                 </CardContent>
               </Card>

@@ -1,12 +1,17 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import Banner from './Banner'
-import { ArrowBigDownDash } from 'lucide-react'
+import { ArrowBigDownDash, Loader2 } from 'lucide-react'
 import { Button } from './ui/button'
 import BlogCard from './BlogCard'
+import { useGetBlog } from '@/services/blog.service'
 
 const Blog = () => {
+
+  const {data, isFetching} = useGetBlog();
+
   return (
     <div>
         <div className="container relative flex flex-col justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10">
@@ -33,12 +38,8 @@ const Blog = () => {
       </div>
      <Banner title="Blogs" description="" />
      <div className='flex flex-wrap justify-center w-[60rem] m-auto'>
-     <BlogCard/>
-     <BlogCard/>
-     <BlogCard/>
-     <BlogCard/>
-     <BlogCard/>
-     <BlogCard/>
+     {isFetching ? <h1><Loader2 className='animate-spin'/> Loading...</h1> :<BlogCard data={data} />}
+   
      </div>
     </div>
   )

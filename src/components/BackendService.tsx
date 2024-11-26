@@ -17,15 +17,18 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from '@/hooks/use-toast';
 import { useCreateService, useGetService } from '@/services/service.service';
+import { ServiceTable } from './ui/serviceTable';
+import {  useQueryClient } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
  
 
 
 const BackendService = () => {
+  const queryClient = useQueryClient();
     const { handleSubmit } = useForm();
-    const{ mutate } = useCreateService()
-    const {data} = useGetService();
+    const{ mutate, isPending } = useCreateService();
 
-    console.log(data);
+
 
     const formSchema = z.object({
         title: z.string().min(2, {
@@ -56,6 +59,10 @@ const BackendService = () => {
                   variant:"success",
                   title: "Service Created successfully",
               });
+
+              queryClient.invalidateQueries({
+                queryKey: ["service"],
+              });
           },
           onError: (err) => {
               console.log('error', err);
@@ -66,6 +73,9 @@ const BackendService = () => {
           },
       });
       };
+
+      const {data: serviceData} = useGetService();
+
 
   return (
     <div className='w-[50rem] flex flex-col justify-center mt-10 m-auto gap-4 mb-[20rem]'> 
@@ -94,9 +104,12 @@ const BackendService = () => {
         />
        <FormMessage/>
       </FormItem>
-      <Button type="submit" className='mt-4'>Submit</Button>
+      <Button type="submit" className='mt-4' disabled={isPending}>
+        {isPending ? <><Loader2 className='animate-spin'/> Submitting</> : 'Submit'}
+        </Button>
     </form>
     </Form>
+    <ServiceTable data={serviceData} tableHead={["title", "description", 'actions']} />
     </div>
   )
 }

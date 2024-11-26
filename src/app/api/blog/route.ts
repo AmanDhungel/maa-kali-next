@@ -4,7 +4,7 @@ import { connectDB } from "../controllers/connectDB";
 
 export async function POST(req: Request) {
     const verificationResponse = await verifyToken(req);
-    if (verificationResponse.status === 401) {
+    if (verificationResponse?.status === 401) {
         return verificationResponse; 
       }  
     try {
@@ -24,7 +24,7 @@ export async function GET() {
     try {
         await connectDB();
         const blog = await Blog.find();
-        return new Response(JSON.stringify(blog), {  status: 200 });
+        return new Response(JSON.stringify(blog), { status: 200 });
     } catch (error) {
         console.error(error);
         return new Response(JSON.stringify({ message: "Something went wrong", error }), { status: 500 });

@@ -21,3 +21,12 @@ export const useCreateService = () => {
         }
     }) 
 }
+
+export const useDeleteService = () => {
+    return useMutation<void> ({
+        mutationFn: async (_id) =>{
+            const res = await axios.delete(`/api/service/${_id}`)
+            return res.data
+        }
+    }) 
+}

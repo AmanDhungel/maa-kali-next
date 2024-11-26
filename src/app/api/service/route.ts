@@ -3,7 +3,7 @@ import { verifyToken } from "../controllers/verifyToken";
 
 export async function POST(req: Request){
     const verificationResponse = await verifyToken(req); 
-    if (verificationResponse.status === 401) {
+    if (verificationResponse?.status === 401) {
         return verificationResponse; 
       }  
     try {
@@ -15,11 +15,8 @@ export async function POST(req: Request){
         return new Response(JSON.stringify({message: "Something went wrong"}), {status: 500})
     }
 }
-export async function GET(req: Request){
-    const verificationResponse = await verifyToken(req); 
-    if (verificationResponse.status === 401) {
-        return verificationResponse; 
-      }  
+export async function GET(){
+
     try {
         const service = await Service.find();
         return new Response(JSON.stringify(service), {  status: 200 });

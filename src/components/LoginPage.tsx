@@ -40,7 +40,7 @@ export function LoginPage() {
  const router = useRouter();
   
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     const payload = {...form.getValues()};
      
     mutate(payload, {

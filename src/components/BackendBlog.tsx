@@ -21,11 +21,12 @@ import { toast } from '@/hooks/use-toast';
 import { TableDemo } from './ui/tableComponent';
 import { query } from 'express';
 import { useQueryClient } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
  
 
 const BackendBlog = () => {
   const { handleSubmit } = useForm();
-  const { mutate } = useCreateBlog();
+  const { mutate, isPending } = useCreateBlog();
   const queryClient = useQueryClient();
 
   const formSchema = z.object({
@@ -145,7 +146,9 @@ const BackendBlog = () => {
        <FormMessage/>
       </FormItem>
 
-      <Button type="submit" className='mt-4'>Submit</Button>
+      <Button type="submit" className='mt-4' disabled={isPending}>
+        {isPending ? <><Loader2 className='animate-spin'/> Submitting</> : 'Submit'}
+        </Button>
     </form>
     </Form>
 
