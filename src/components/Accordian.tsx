@@ -12,8 +12,7 @@ import {
 
   
 
-  export function ServiceAccordion({ className, data }: { data?: Data[]; className?: string }) {
-
+  export function ServiceAccordion({ className, data }: { data?: Data[]; className?: string }): JSX.Element {
 
     return (
       <Accordion type="single"  collapsible className={`${className} w-[30rem] p-3`}>

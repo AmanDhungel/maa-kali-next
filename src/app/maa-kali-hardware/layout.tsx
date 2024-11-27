@@ -18,7 +18,7 @@ export default function RootLayout({
 const data = [
     {
      title: 'Home',
-     href: '/maa-kali-hardware/',
+     href: '/maa-kali-hardware',
     },
     {
      title: 'Services',

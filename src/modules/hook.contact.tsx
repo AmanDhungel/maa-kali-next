@@ -12,7 +12,7 @@ const { toast } = useToast();
 
 
 const formSchema = z.object({
-    name: z.string().min(2, {
+    name: z.string().min(10, {
       message: "Username must be at least 2 characters.",
     }),
     phonenumber: z.string().min(10).max(10, {

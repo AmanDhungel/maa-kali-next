@@ -1,3 +1,4 @@
+'use client'
 import {
     Menubar,
     MenubarMenu,
@@ -5,6 +6,7 @@ import {
   } from "@/components/ui/menubar"
 import DarkModeToggle from "./DarkMode"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 type data = {
     href? : string,
@@ -12,10 +14,12 @@ type data = {
 }
   
   export function Navbar({data} : {data? : data[]}) {
+    const pathname = usePathname();
+  
     return (
       <Menubar className="p-4  fixed z-50">
         {data?.map((navdata, index) => (
-        <Link href={navdata?.href ? navdata?.href : ''} key={index} className="hover:bg-gray-200 dark:hover:bg-gray-800 ">
+        <Link href={navdata?.href ? navdata?.href : ''} key={index} className={` ${pathname === navdata?.href ? 'animated-grey text-black' : ''} `}>
         <MenubarMenu>
           <MenubarTrigger className="cursor-pointer">{navdata?.title}</MenubarTrigger>
         </MenubarMenu>

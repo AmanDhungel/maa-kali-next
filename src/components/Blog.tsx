@@ -38,7 +38,7 @@ const Blog = () => {
       </div>
      <Banner title="Blogs" description="" />
      <div className='flex flex-wrap justify-center w-[60rem] m-auto'>
-     {isFetching ? <h1><Loader2 className='animate-spin'/> Loading...</h1> :<BlogCard data={data} />}
+     {isFetching ? <h1 className='flex gap-3'><Loader2 className='animate-spin'/> Loading...</h1> :<BlogCard data={data} />}
    
      </div>
     </div>

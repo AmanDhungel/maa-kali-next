@@ -2,17 +2,25 @@
 import Image from 'next/image'
 import React from 'react'
 import Banner from './Banner'
-import ImageCard from './ImageCard'
 import { useGetGallery } from '@/services/gallery.service'
 import { Loader2 } from 'lucide-react'
-import { Carousel } from './ui/carousel'
 import { CarouselDemo } from './Carousel'
 
-const PhotoGallery = () => {
+interface GalleryProps {
+    id: string
+    image: string
+    title: string
+    data : {
+        id: string
+        image: string
+        title: string
+    }[]
+}
+
+const PhotoGallery : React.FC<GalleryProps> = () => {
 
    const {data, isLoading} = useGetGallery()
 
-   console.log('data', data);
   return (
     <div>
 <div className="h-screen  py-6 sm:py-8 lg:py-12">
@@ -77,7 +85,7 @@ return(<CarouselDemo
 item={item?.image}
 imageClassName='w-[20rem] h-[30rem] object-cover'
 key={item._id}
-className="card__image w-[20rem] h-[30rem] "
+className="card__image w-[20rem] h-[30rem] cursor-grab active:cursor-grabbing"
 />
 )})}
 </div>

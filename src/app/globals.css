@@ -221,3 +221,18 @@ body {
 	font-size: 12px;
 	color: #b8b8b8;
 }
+
+@keyframes greyFlow {
+	0% {
+	  background-position: -100%;
+	}
+	100% {
+	  background-position: 100%;
+	}
+  }
+  
+  .animated-grey {
+	background: linear-gradient(90deg, lightgrey, grey, lightgrey);
+	background-size: 200%;
+	animation: greyFlow 3s linear infinite;
+  }
