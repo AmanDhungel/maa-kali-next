@@ -1,10 +1,11 @@
 'use client'
 
+import { ServiceSchema } from "@/_schema/service"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
 export const useGetService = () => {
-    return useQuery<void> ({
+    return useQuery<{ message: string }, { message: string }, ServiceSchema> ({
        queryKey: ["service"],
        queryFn: async () => {
             const res = await axios.get("/api/service")

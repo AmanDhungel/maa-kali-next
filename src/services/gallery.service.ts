@@ -1,8 +1,9 @@
+import { GallerySchema } from "@/_schema/gallery"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
 export const useGetGallery = () => {
-    return useQuery<void> ({
+    return useQuery<{message : string}, {message : string}, GallerySchema> ({
        queryKey: ["gallery"],
        queryFn: async () => {
             const res = await axios.get("/api/gallery")
