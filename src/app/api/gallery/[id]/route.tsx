@@ -1,5 +1,4 @@
 import { connectDB } from "../../controllers/connectDB";
-import Blog from "../../model/Blog.model";
 import Gallery from "../../model/Gallery.model";
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {

@@ -8,7 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import Image from "next/image"
 
 
 export function CarouselDemo({item, className, imageClassName}: {item : string[], className? : string, imageClassName? : string}) {

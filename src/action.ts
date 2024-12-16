@@ -16,8 +16,8 @@ const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}`;
 export const parseJson = (value: string) => {
   try {
     return JSON.parse(value);
-  } catch (e) {
-    return value;
+  } catch (err) {
+    return err;
   }
 };
 
@@ -71,7 +71,7 @@ export async function Post<PayloadType, ResponseType>({
     //   throw new Error('Unauthorized');
     // }
     return (await res.json()) as ResponseType;
-  } catch (error: any) {
+  } catch (error) {
     if (error instanceof Error)
       throw new Error(error.message, { cause: error.cause });
     throw new Error('An error occurred.');
@@ -101,7 +101,7 @@ export async function Delete<ResponseType>({
     //   throw new Error('Unauthorized');
     // }
     return (await res.json()) as ResponseType;
-  } catch (error: any) {
+  } catch (error : { status: number; message: string }) {
     throw {
       status: error.status || 500,
       message: error.message || 'An error occurred',

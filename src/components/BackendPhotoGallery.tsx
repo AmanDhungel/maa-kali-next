@@ -17,8 +17,6 @@ import { useCreateGallery, useGetGallery } from '@/services/gallery.service'
 import { toast } from '@/hooks/use-toast'
 import { useQueryClient } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import { Console } from 'console'
-import Image from 'next/image'
 import { TableImage } from './ui/imageTable'
 
 const BackendPhotoGallery = () => {

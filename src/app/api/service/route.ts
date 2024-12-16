@@ -12,7 +12,7 @@ export async function POST(req: Request){
         await newService.save();
         return new Response(JSON.stringify({message: "Service Created Successfully"}), {status: 201})
     } catch (error) {
-        return new Response(JSON.stringify({message: "Something went wrong"}), {status: 500})
+        return new Response(JSON.stringify({message: `Something went wrong `, error}), {status: 500})
     }
 }
 export async function GET(){
@@ -21,7 +21,7 @@ export async function GET(){
         const service = await Service.find();
         return new Response(JSON.stringify(service), {  status: 200 });
     } catch (error) {
-        return new Response(JSON.stringify({message: "Something went wrong trying to get service"}), {status: 500})
+        return new Response(JSON.stringify({message: `Something went wrong trying to get service`, error}), {status: 500})
     }
 }
 

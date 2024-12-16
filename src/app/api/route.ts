@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import {connectDB} from '@/app/api/controllers/connectDB.js'
 import User from '@/app/api/model/User.model.js'
 
