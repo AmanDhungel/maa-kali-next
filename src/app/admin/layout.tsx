@@ -6,7 +6,8 @@ import Provider from "@/lib/query-client-provider";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",
-  description: "Hardware near me, Best hardware in nepal, Hardware in bhaktapur, Radhe radhe hardware",
+  description:
+    "Hardware near me, Best hardware in nepal, Hardware in bhaktapur, Radhe radhe hardware",
 };
 
 export default function RootLayout({
@@ -14,32 +15,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-const data = [
+  const data = [
     {
-     title: 'Add Blog',
-     href: '/admin/blog',
+      title: "Add Blog",
+      href: "/admin/blog",
     },
     {
-     title: 'Add Photos to Gallery',
-     href: '/admin/gallery',
+      title: "Add Photos to Gallery",
+      href: "/admin/gallery",
     },
     {
-     title: 'Add serives',
-     href: '/admin/service',
+      title: "Add serives",
+      href: "/admin/service",
     },
-    ]
+    {
+      title: "Add Product",
+      href: "/admin/product",
+    },
+  ];
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body className={`antialiased`}>
         <div className="p-8 flex justify-center">
-        <Navbar data={data}/>
+          <Navbar data={data} />
         </div>
-        <Provider>
-        {children}
-        </Provider>
-        <Footer/>
+        <Provider>{children}</Provider>
+        <Footer />
       </body>
     </html>
   );
