@@ -13,17 +13,18 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Eraser, Trash2 } from "lucide-react";
 import AlertDailog from "./AlertDailog";
 import { CarouselDemo } from "./Carousel";
+import { useDeleteProduct } from "@/services/product.service";
 
 export function ProductTableComponent({ data, ...props }) {
   const queryClient = useQueryClient();
 
-  // const { mutate } = useDeleteBlog();
+  const { mutate } = useDeleteProduct();
 
   const handleDelete = (id) => {
     mutate(id, {
       onSuccess: (val) => {
         queryClient.invalidateQueries({
-          queryKey: ["blog"],
+          queryKey: ["product"],
         });
         toast({
           variant: "success",

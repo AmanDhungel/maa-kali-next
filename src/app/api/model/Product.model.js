@@ -4,7 +4,7 @@ export const ProductSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Title cannot be empty'],
-        minLength: 10
+        minLength: 1
     },
     description: {
         type: String,

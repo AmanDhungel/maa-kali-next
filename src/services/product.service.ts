@@ -19,3 +19,12 @@ export const useCreateProduct = () => {
     },
   });
 };
+
+export const useDeleteProduct = () => {
+  return useMutation<void>({
+    mutationFn: async (id) => {
+      const res = await axios.delete(`/api/products/${id}`);
+      return res.data;
+    },
+  });
+};

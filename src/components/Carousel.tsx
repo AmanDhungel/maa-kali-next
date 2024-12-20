@@ -18,7 +18,6 @@ export function CarouselDemo({
   className?: string;
   imageClassName?: string;
 }) {
-  console.log("item", item);
   return (
     <Carousel className={`w-[150px] max-w-xs h-full ${className}`}>
       <CarouselContent className="h-full">

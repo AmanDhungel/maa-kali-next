@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CldUploadButton } from "next-cloudinary";
 import { toast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
+import { Key, Loader2 } from "lucide-react";
 import { useCreateProduct, useGETProduct } from "@/services/product.service";
 import ColorPicker from "react-pick-color";
 import { ProductTableComponent } from "./productTableComponent";
@@ -31,19 +31,19 @@ const BackendProduct = () => {
 
   const formSchema = z.object({
     title: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
+      message: "Title must be at least 2 characters.",
     }),
-    price: z.string().min(1, {
-      message: "Price number must be exactly 10 characters.",
+    price: z.string().length(10, {
+      message: "Price must be exactly 10 characters.",
     }),
-    image: z.array(z.string()).min(1, {
-      message: "Select the subject you want equire about, it cannot be empty.",
+    image: z.array(z.string()).min(2, {
+      message: "There must be at least two images.",
     }),
     description: z.string().min(10, {
-      message: "description shall be more than 20 characters.",
+      message: "Description must be more than 10 characters.",
     }),
-    color: z.string().min(1, {
-      message: "color shall be not be empty.",
+    color: z.string().nonempty({
+      message: "Color cannot be empty.",
     }),
   });
 
@@ -58,8 +58,14 @@ const BackendProduct = () => {
     },
   });
 
+  console.log("form erro ", form.formState.errors);
+  console.log("form erro ", form.getValues());
+  console.log("isValid", form.formState.isValid);
+
   const onSubmit = () => {
     const payload = { ...form.getValues() };
+
+    console.log("payload", payload);
     mutate(payload, {
       onSuccess: (val) => {
         queryClient.invalidateQueries({
@@ -69,7 +75,7 @@ const BackendProduct = () => {
         form.reset();
         toast({
           variant: "success",
-          title: "Blog Created successfully",
+          title: "Product Created successfully",
         });
       },
       onError: (err) => {
@@ -84,25 +90,26 @@ const BackendProduct = () => {
     });
   };
 
-  console.log("form values from submit", form.getValues());
+  console.log("form values from submit", form.formState.errors);
 
   const { data, isFetching } = useGETProduct();
 
-  console.log("data", data);
   return (
     <div className="w-[50rem] flex flex-col justify-center mt-10 m-auto gap-4  ">
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Blog Title</FormLabel>
+                <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Title" className="py-4" {...field} />
+                  <Input {...field} placeholder="Enter title" />
                 </FormControl>
-                <FormMessage />
+                <FormMessage>
+                  {form.formState.errors.title?.message}
+                </FormMessage>
               </FormItem>
             )}
           />
@@ -128,7 +135,7 @@ const BackendProduct = () => {
           <FormField
             control={form.control}
             name="color"
-            render={({ field }) => (
+            render={() => (
               <FormItem>
                 <FormLabel>Color</FormLabel>
                 <FormControl>

@@ -7,7 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",
-  description: "Hardware near me, Best hardware in nepal, Hardware in bhaktapur, Radhe radhe hardware",
+  description:
+    "Hardware near me, Best hardware in nepal, Hardware in bhaktapur, Radhe radhe hardware",
 };
 
 export default function RootLayout({
@@ -15,41 +16,37 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-const data = [
+  const data = [
     {
-     title: 'Home',
-     href: '/maa-kali-hardware',
+      title: "Home",
+      href: "/maa-kali-hardware",
     },
     {
-     title: 'Services',
-     href: '/maa-kali-hardware/services',
+      title: "Services",
+      href: "/maa-kali-hardware/services",
     },
     {
-     title: 'Blog',
-     href: '/maa-kali-hardware/blog',
+      title: "Blog",
+      href: "/maa-kali-hardware/blog",
     },
     {
-     title: 'Contact',
-     href: '/maa-kali-hardware/contact',
+      title: "Contact",
+      href: "/maa-kali-hardware/contact",
     },
     {
-     title: 'gallery',
-     href: '/maa-kali-hardware/gallery',
+      title: "gallery",
+      href: "/maa-kali-hardware/gallery",
     },
-]
+  ];
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body className={`antialiased`}>
         <div className="p-8 flex justify-center">
-        <Navbar data={data}/>
+          <Navbar data={data} />
         </div>
-        <Provider>
-        {children}
-        </Provider>
+        <Provider>{children}</Provider>
         <Toaster />
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

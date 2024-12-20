@@ -28,7 +28,7 @@ const PhotoGallery: React.FC<GalleryProps> = () => {
         "flattenedImages",
         data.flatMap((item) => item?.image)
       );
-      setImages((prevImages) => [...prevImages, ...flattenedImages]);
+      setImages([...flattenedImages]);
     }
   }, [data]);
 
@@ -42,19 +42,19 @@ const PhotoGallery: React.FC<GalleryProps> = () => {
             <Image
               src={"/image/maa-kali-hero.JPG"}
               alt="Banner Image"
-              className="backdrop-blur-xl brightness-50 w-[80vw] rounded-b-xl  h-[50vh] object-cover"
+              className="backdrop-blur-xl brightness-50 w-[67vw] rounded-b-xl  h-[50vh]"
               width={500}
               height={500}
             />
             <div className="absolute top-[30vh]">
               <div className="flex flex-col items-center justify-center m-auto">
-                <h1 className="text-4xl font-bold ">
+                <h1 className="text-4xl font-bold text-white">
                   Welcome To the Museum of{" "}
                   <span className="grey-bg text-4xl bg-gradient-to-r from-slate-200 to-amber-300 via-amber-400 p-1 bg-clip-text ">
                     Maa Kali Hardware
                   </span>
                 </h1>
-                <h1 className="text-4xl font-bold mt-10">
+                <h1 className="text-4xl font-bold mt-10 text-white">
                   Explore the Gallery!
                 </h1>
               </div>
@@ -74,7 +74,7 @@ const PhotoGallery: React.FC<GalleryProps> = () => {
               <Image
                 src={item}
                 key={i}
-                className="w-[24.4rem] h-[30rem] cursor-grab active:cursor-grabbing"
+                className="w-[25rem] h-[25rem] object-cover"
                 width={500}
                 height={500}
                 alt="maa kali hardware"

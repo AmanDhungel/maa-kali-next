@@ -1,22 +1,20 @@
-import { connectDB } from "../../controllers/connectDB";
-import Service from "../../model/Service.model";
+import Product from "../../model/Product.model";
 
 export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
-    await connectDB();
-    const blog = await Service.findByIdAndDelete(params.id);
+    const product = await Product.findByIdAndDelete(params.id);
 
-    if (!blog) {
-      return new Response(JSON.stringify({ message: "Service not found" }), {
+    if (!product) {
+      return new Response(JSON.stringify({ message: "Product not found" }), {
         status: 404,
       });
     }
 
     return new Response(
-      JSON.stringify({ message: "Service Deleted Successfully" }),
+      JSON.stringify({ message: "Product Deleted Successfully" }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
