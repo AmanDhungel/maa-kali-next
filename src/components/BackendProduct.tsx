@@ -18,13 +18,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CldUploadButton } from "next-cloudinary";
 import { toast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
-import { Key, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useCreateProduct, useGETProduct } from "@/services/product.service";
 import ColorPicker from "react-pick-color";
 import { ProductTableComponent } from "./productTableComponent";
 
 const BackendProduct = () => {
-  const { handleSubmit } = useForm();
   const { mutate, isPending } = useCreateProduct();
   const queryClient = useQueryClient();
   const [color, setColor] = useState("#fff");
