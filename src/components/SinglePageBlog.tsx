@@ -87,33 +87,18 @@ const SinglePageBlog = ({ params: { id } }: { params: { id: string } }) => {
           {data?.shortDescription}
         </h1>
         <h1 className="text-2xl font-bold mt-10">Description</h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data?.description ? data?.description : "",
-          }}
-          className="line-clamp-5"></div>
-        {data?.image[1] ? (
-          <Image
-            src={data?.image[1] ? data?.image[1] : ""}
-            width={500}
-            height={500}
-            alt="image"
-            className="m-auto mt-10"
-          />
-        ) : (
-          ""
-        )}
-
-        <div
-          className="line-clamp-none"
-          style={{
-            WebkitLineClamp: "initial",
-          }}>
-          {data?.description ? (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data?.description,
-              }}
+        <div className="flex gap-5">
+          <p
+            dangerouslySetInnerHTML={{
+              __html: data?.description ? data?.description : "",
+            }}></p>
+          {data?.image[1] ? (
+            <Image
+              src={data?.image[1] ? data?.image[1] : ""}
+              width={500}
+              height={500}
+              alt="image"
+              className="m-auto -mt-4"
             />
           ) : (
             ""

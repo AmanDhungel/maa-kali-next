@@ -4,8 +4,19 @@ import Product from "./Product";
 import { useGETProduct } from "@/services/product.service";
 import { Loader2 } from "lucide-react";
 
+export interface ProductProps {
+  id: string;
+  title: string;
+  color: string;
+  price: string;
+  image: string;
+}
+[];
+
 const ProductTestimonials = () => {
   const { data, isLoading } = useGETProduct();
+
+  console.log("data", data);
   // const productdata = [
   //   {
   //     title: "Plumbing",
@@ -73,10 +84,12 @@ const ProductTestimonials = () => {
   // ];
   return (
     <div>
-      <Banner
-        title="Products"
-        description="Some of the Product we sell are listed Down - Take a look"
-      />
+      <div className="container relative flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
+        <Banner
+          title="Products"
+          description="Some of the Product we sell are listed Down - Take a look"
+        />
+      </div>
       <div className="flex flex-wrap justify-center m-auto max-w-[82rem] gap-10">
         {isLoading ? (
           <div className="flex">

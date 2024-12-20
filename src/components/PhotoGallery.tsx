@@ -32,8 +32,6 @@ const PhotoGallery: React.FC<GalleryProps> = () => {
     }
   }, [data]);
 
-  console.log("images", images);
-  console.log("data", data);
   return (
     <div>
       <div className="py-6 sm:py-8 lg:py-12">
@@ -48,13 +46,13 @@ const PhotoGallery: React.FC<GalleryProps> = () => {
             />
             <div className="absolute top-[30vh]">
               <div className="flex flex-col items-center justify-center m-auto">
-                <h1 className="text-4xl font-bold text-white">
+                <h1 className="text-base flex flex-col sm:flex-row sm:text-xl md:text-2xl lg:text-4xl font-bold text-white">
                   Welcome To the Museum of{" "}
-                  <span className="grey-bg text-4xl bg-gradient-to-r from-slate-200 to-amber-300 via-amber-400 p-1 bg-clip-text ">
+                  <span className="grey-bg text-base sm:text-xl md:text-2xl bg-gradient-to-r from-slate-200 to-amber-300 via-amber-400 p-1 bg-clip-text lg:text-4xl">
                     Maa Kali Hardware
                   </span>
                 </h1>
-                <h1 className="text-4xl font-bold mt-10 text-white">
+                <h1 className="text-base sm:text-xl md:text-2xl lg:text-4xl font-bold mt-10 text-white">
                   Explore the Gallery!
                 </h1>
               </div>
@@ -62,7 +60,7 @@ const PhotoGallery: React.FC<GalleryProps> = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-[3.9rem] justify-center flex-wrap w-[94rem] m-auto">
+      <div className="flex gap-[3.9rem] justify-center flex-wrap md:w-[94rem] m-auto">
         {isLoading ? (
           <div className="flex justify-center">
             {" "}
