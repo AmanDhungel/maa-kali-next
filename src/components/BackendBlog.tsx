@@ -20,7 +20,7 @@ import { useCreateBlog, useGetBlog } from "@/services/blog.service";
 import { toast } from "@/hooks/use-toast";
 import { TableDemo } from "./ui/tableComponent";
 import { Loader2 } from "lucide-react";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 const BackendBlog = () => {
   const { mutate, isPending } = useCreateBlog();
