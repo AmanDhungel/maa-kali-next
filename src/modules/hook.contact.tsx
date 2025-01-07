@@ -1,17 +1,14 @@
 import { useToast } from "@/hooks/use-toast";
-import { useCreateContact } from "@/services/contact.service"
+import { useCreateContact } from "@/services/contact.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-
-
 export const useContact = () => {
-const  {mutate, isPending} = useCreateContact();
-const { toast } = useToast();
+  const { mutate, isPending } = useCreateContact();
+  const { toast } = useToast();
 
-
-const formSchema = z.object({
+  const formSchema = z.object({
     name: z.string().min(10, {
       message: "Username must be at least 2 characters.",
     }),
@@ -24,41 +21,43 @@ const formSchema = z.object({
     message: z.string().min(20, {
       message: "message shall be more than 20 characters.",
     }),
-  })
+  });
 
- const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-        name: "",
-        phonenumber: "",
-        subject: "",
-        message: "",
+      name: "",
+      phonenumber: "",
+      subject: "",
+      message: "",
     },
-  })
+  });
 
-const onSubmit = () => {
+  const onSubmit = () => {
     const payload = {
-        ...form.getValues()
-    }
+      ...form.getValues(),
+    };
 
-    mutate(payload, {
-        onSuccess: (val) => {
-            console.log(val);
-            form.reset();
-            toast({
-                variant:"success",
-                title: "Message sent successfully",
-            });
-        },
-        onError: (err) => {
-            console.log('error', err);
-        },
+    mutate(payload as any, {
+      onSuccess: () => {
+        form.reset();
+        toast({
+          variant: "success",
+          title: "Message sent successfully",
+        });
+      },
+      onError: () => {
+        toast({
+          variant: "destructive",
+          title: "some error occured",
+        });
+      },
     });
-}
+  };
 
-return {
+  return {
     form,
     onSubmit,
     isPending,
   };
-}
+};

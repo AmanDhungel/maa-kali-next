@@ -23,7 +23,6 @@ export async function DELETE(
       }
     );
   } catch (error) {
-    console.error("error", error);
     return new Response(
       JSON.stringify({ message: "Something went wrong", error }),
       {
@@ -43,7 +42,6 @@ export async function GET(
     const blog = await Blog.findById(params.id);
     return new Response(JSON.stringify(blog), { status: 200 });
   } catch (error) {
-    console.error("error", error);
     return new Response(
       JSON.stringify({ message: "Something went wrong", error }),
       { status: 500 }

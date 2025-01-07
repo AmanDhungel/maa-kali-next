@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Provider from "@/lib/query-client-provider";
 import { Toaster } from "@/components/ui/toaster";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",

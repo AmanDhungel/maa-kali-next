@@ -1,108 +1,64 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "./ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import Banner from "./Banner";
+import { useGetService } from "@/services/service.service";
+import Link from "next/link";
 
 const ServicesPage = () => {
+  const { data: serviceData, isFetching } = useGetService();
+
+  const [data, setData] = React.useState(serviceData?.slice(0, 4));
+
+  useEffect(() => {
+    setData(serviceData?.slice(0, 4));
+  }, [serviceData]);
+
+  if (isFetching) {
+    return (
+      <div className="flex gap-3 justify-center items-center">
+        <Loader2 className="animate-spin" /> Loading...
+      </div>
+    );
+  }
   return (
     <div className="container relative flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
       <Banner
-        title="Services"
-        description="Here is a few of the awesome Services & Products we provide."
-        className="mt-10"
+        title="Our Work"
+        description="Testimonials of our Work - The Showcase"
       />
-      <div className="flex  flex-wrap gap-4">
-        <div className="w-[30vw] flex  mt-5">
-          <Image
-            src="/image/maa-kali-hero.JPG"
-            alt=""
-            className="rounded rounded-r-none"
-            width={250}
-            height={250}
-          />
-          <div className="space-y-5 border border-l-0  p-5 rounded w-[17vw]">
-            <h1>Title</h1>
-            <p>Lorem</p>
-            <Button
-              className="flex items-center gap-1"
-              onClick={() => console.log("clicked")}>
-              Learn More
-              <ArrowRight />
-            </Button>
-          </div>
-        </div>
-        <div className="w-[30vw] flex  mt-5">
-          <Image
-            src="/image/maa-kali-hero.JPG"
-            alt=""
-            className="rounded rounded-r-none"
-            width={250}
-            height={250}
-          />
-          <div className="space-y-5 border border-l-0  p-5 rounded">
-            <h1>Title</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              praesentium, iusto facilis ratione laborum illo aliquid accusamus
-              nesciunt eveniet culpa laboriosam veritatis libero aut inventore
-              fuga id expedita beatae. Natus!
-            </p>
-            <Button
-              className="flex items-center gap-1"
-              onClick={() => console.log("clicked")}>
-              Learn More
-              <ArrowRight />
-            </Button>
-          </div>
-        </div>
-        <div className="w-[30vw] flex  mt-5">
-          <Image
-            src="/image/maa-kali-hero.JPG"
-            alt=""
-            className="rounded rounded-r-none"
-            width={250}
-            height={250}
-          />
-          <div className="space-y-5 border border-l-0  p-5 rounded">
-            <h1>Title</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              praesentium, iusto facilis ratione laborum illo aliquid accusamus
-              nesciunt eveniet culpa laboriosam veritatis libero aut inventore
-              fuga id expedita beatae. Natus!
-            </p>
-            <Button
-              className="flex items-center gap-1"
-              onClick={() => console.log("clicked")}>
-              Learn More
-              <ArrowRight />
-            </Button>
-          </div>
-        </div>
-        <div className="w-[30vw] flex  mt-5">
-          <Image
-            src="/image/maa-kali-hero.JPG"
-            alt=""
-            className="rounded rounded-r-none"
-            width={250}
-            height={250}
-          />
-          <div className="space-y-5 border border-l-0  p-5 rounded">
-            <h1>Title</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              praesentium, iusto facilis ratione laborum illo aliquid accusamus
-              nesciunt eveniet culpa laboriosam veritatis libero aut inventore
-              fuga id expedita beatae. Natus!
-            </p>
-            <Button
-              className="flex items-center gap-1"
-              onClick={() => console.log("clicked")}>
-              Learn More
-              <ArrowRight />
-            </Button>
-          </div>
+      <div className="flex  flex-wrap ">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center  w-full">
+          {data?.map((item) => {
+            return (
+              <div
+                className="flex-col 2xl:flex-row w-[80vw] md:w-[40vw] lg:w-[40vw] xl:w-[35vw] 2xl:w-[30vw] 2xl:h-[20rem] flex mt-5"
+                key={item._id}>
+                <Image
+                  src={item?.image ? item?.image : "/image/maa-kali-hero.JPG"}
+                  alt=""
+                  className="rounded rounded-r-none w-[67vw] lg:w-[30vw]  2xl:w-[15vw] max-h-[35rem] "
+                  width={650}
+                  height={650}
+                />
+                <div className="w-[67vw] md:w-[40vw] xl:w-[35vw] border-t-0 2xl:border-t space-y-5 border 2xl:border-l-0  p-5 rounded 2xl:w-[15vw] flex flex-col justify-evenly ">
+                  <h1 className="text-xl font-semibold">Title</h1>
+                  <p className="sm:line-clamp-2 2xl:line-clamp-5 text-justify w-[57vw] md:w-[30vw] xl:w-[25vw] 2xl:w-[10vw] break-words">
+                    {" "}
+                    {item?.description}
+                  </p>
+                  <Link href={`/services/${item._id}`}>
+                    <Button className="flex items-center gap-1">
+                      Learn More
+                      <ArrowRight />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

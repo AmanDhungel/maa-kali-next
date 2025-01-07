@@ -15,7 +15,7 @@ interface BlogCardProps {
 
 const BlogCard = ({ data }: BlogCardProps) => {
   return (
-    <div className="grid grid-cols-1 gap-[4.2rem] lg:grid-cols-3">
+    <div className="grid grid-cols-1 lg:grid-cols-3">
       {data.map((item) => (
         <div className="flex justify-center items-center " key={item._id}>
           <div className="container flex flex-col items-center space-y-5">

@@ -18,7 +18,7 @@ export function Navbar({ data }: { data?: data[] }) {
     <>
       <Menubar
         className={`p-2 flex h-full flex-col md:opacity-100 justify-center  max-sm:w-full  md:p-4 gap-4  md:flex-row transition-all duration-500 ease-in-out ${
-          isOpen ? "h-[43vh] md:h-full opacity-100" : "0px opacity-0"
+          isOpen ? "h-[43vh] md:h-full opacity-100" : "0px opacity-0 max-sm:h-0"
         }`}>
         {data?.map((navdata, index) => (
           <Link

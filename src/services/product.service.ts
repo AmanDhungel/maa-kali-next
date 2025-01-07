@@ -2,10 +2,13 @@ import { ProductProps } from "@/components/ProductTestimonials";
 import { ApiResponse } from "@/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Error from "next/error";
 
 export const useGETProduct = () => {
-  return useQuery<ProductProps, Error>({
+  return useQuery<
+    ApiResponse<ProductProps[]>,
+    { message: string },
+    ProductProps[]
+  >({
     queryKey: ["product"],
     queryFn: async () => {
       const res = await axios.get("/api/products");

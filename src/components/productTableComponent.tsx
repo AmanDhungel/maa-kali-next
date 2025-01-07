@@ -15,12 +15,18 @@ import AlertDailog from "./AlertDailog";
 import { CarouselDemo } from "./Carousel";
 import { useDeleteProduct } from "@/services/product.service";
 
-export function ProductTableComponent({ data, ...props }) {
+export function ProductTableComponent({
+  data,
+  ...props
+}: {
+  data: any;
+  [key: string]: any;
+}) {
   const queryClient = useQueryClient();
 
   const { mutate } = useDeleteProduct();
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     mutate(id, {
       onSuccess: (val) => {
         queryClient.invalidateQueries({
@@ -32,13 +38,10 @@ export function ProductTableComponent({ data, ...props }) {
         });
       },
 
-      onError: (err) => {
-        console.log("error", err);
+      onError: () => {
         toast({
           variant: "destructive",
-          title: err?.response?.data?.message
-            ? err?.response.data.message
-            : err.message,
+          title: "Error deleting product",
         });
       },
     });
@@ -47,11 +50,11 @@ export function ProductTableComponent({ data, ...props }) {
   return (
     <Table className="w-1000px overflow-hidden">
       <TableCaption>
-        {!data || data?.length < 1 ? "No Data Found" : props.tableCap}
+        {!data || data?.length < 1 ? "No Data Found" : props?.tableCap}
       </TableCaption>
       <TableHeader>
         <TableRow>
-          {props.tableHead.map((data, index) => (
+          {props.tableHead.map((data: string, index: number) => (
             <TableHead
               key={index}
               className={
@@ -67,7 +70,7 @@ export function ProductTableComponent({ data, ...props }) {
            "No Data Found"
           :  */}
         {data?.map(
-          (tableData) => (
+          (tableData: any) => (
             <TableRow key={tableData._id} className="text-wrap w-10">
               <TableCell className="font-medium">
                 {tableData.image?.length >= 1 && (
@@ -86,7 +89,7 @@ export function ProductTableComponent({ data, ...props }) {
               </TableCell>
               <TableCell>
                 <p
-                  className="flex items-center w-32 h-10 overflow-hidden overflow-ellipsis"
+                  className="flex items-center w-32 h-10 overflow-scroll hide-scrollbar"
                   dangerouslySetInnerHTML={{
                     __html: tableData.description,
                   }}></p>
@@ -109,7 +112,9 @@ export function ProductTableComponent({ data, ...props }) {
                   <AlertDailog
                     title="delete this data"
                     text={<Trash2 />}
-                    onContinue={() => handleDelete(String(tableData._id))}
+                    onContinue={() =>
+                      handleDelete(String(tableData._id) as any)
+                    }
                   />
                   <span
                     className="absolute z-50 left-1/2 transform translate-y-10 -translate-x-[25px] mt-2 w-max bg-black text-white

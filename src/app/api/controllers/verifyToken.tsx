@@ -1,13 +1,8 @@
-/* eslint-disable */
-import { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose';
-import cookie from 'cookie';
+import { jwtVerify } from "jose";
+import { cookies } from "next/headers";
 
-// Middleware to verify JWT token
-export async function verifyToken(req: NextRequest): Promise<any> {
-  // Parse cookies from the request headers
-  const cookies = cookie.parse(req.headers.get('cookie') || '');
-  const token = cookies.token; // Extract the token from cookies
+export async function verifyToken(): Promise<Response | void> {
+  const token = cookies().get("token");
 
   // Check if token exists
   if (!token) {
@@ -19,18 +14,19 @@ export async function verifyToken(req: NextRequest): Promise<any> {
 
   // Validate the presence of the JWT secret
   if (!process.env.JWT_SECRET) {
-    console.error('JWT_SECRET is not defined in environment variables.');
-    throw new Error('JWT_SECRET is missing');
+    console.error("JWT_SECRET is not defined in environment variables.");
+    throw new Error("JWT_SECRET is missing");
   }
 
   const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
   try {
     // Verify the token using `jose`
-    const { payload } = await jwtVerify(token, secret);
-    return payload; // Successfully verified
+    const payload = await jwtVerify(token.value, secret);
+    console.log("Token verified:", payload);
+    return; // Successfully verified
   } catch (error) {
-    console.error('Token verification failed:', error);
+    console.error("Token verification failed:", error);
 
     // Return a 403 response for invalid token
     return new Response(

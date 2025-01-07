@@ -14,12 +14,19 @@ import AlertDailog from "../AlertDailog";
 import { CarouselDemo } from "../Carousel";
 import { useDeleteGallery } from "@/services/gallery.service";
 
-export function TableImage({ data, ...props }) {
+export function TableImage({
+  data,
+  ...props
+}: {
+  data: any;
+  tableCap?: string;
+  tableHead?: string[];
+}) {
   const queryClient = useQueryClient();
 
   const { mutate } = useDeleteGallery();
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: any) => {
     mutate(id, {
       onSuccess: (val) => {
         queryClient.invalidateQueries({
@@ -31,13 +38,10 @@ export function TableImage({ data, ...props }) {
         });
       },
 
-      onError: (err) => {
-        console.log("error", err);
+      onError: () => {
         toast({
           variant: "destructive",
-          title: err.response?.data?.message
-            ? err.response.data.message
-            : err.message,
+          title: "Error while deleting image",
         });
       },
     });
@@ -46,15 +50,17 @@ export function TableImage({ data, ...props }) {
   return (
     <Table className="w-1000px overflow-hidden">
       <TableCaption>
-        {!data || data?.length < 1 ? "No Data Found" : props.tableCap}
+        {!data || data?.length < 1 ? "No Data Found" : props?.tableCap}
       </TableCaption>
       <TableHeader>
         <TableRow>
-          {props?.tableHead?.map((data, index) => (
+          {props?.tableHead?.map((data: string, index: number) => (
             <TableHead
               key={index}
               className={
-                index === props.tableHead.length - 1 ? "text-right" : ``
+                props?.tableHead?.length && index === props.tableHead.length - 1
+                  ? "text-right"
+                  : ``
               }>
               {data}
             </TableHead>
@@ -65,8 +71,7 @@ export function TableImage({ data, ...props }) {
         {/* {!data && data?.length < 1 ?
            "No Data Found"
           :  */}
-        {data?.map((tableData) => {
-          console.log("tableData", tableData);
+        {data?.map((tableData: any) => {
           return (
             <TableRow key={tableData._id} className="text-wrap w-10">
               <TableCell className="font-medium">

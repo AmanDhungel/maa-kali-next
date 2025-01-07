@@ -45,9 +45,8 @@ const BackendPhotoGallery = () => {
         title: "No image selected",
       });
     }
-    mutate(payload, {
-      onSuccess: (val) => {
-        console.log(val);
+    mutate(payload as any, {
+      onSuccess: () => {
         form.reset();
         toast({
           variant: "success",
@@ -58,13 +57,10 @@ const BackendPhotoGallery = () => {
           queryKey: ["gallery"],
         });
       },
-      onError: (err) => {
-        console.log("error", err);
+      onError: () => {
         toast({
           variant: "destructive",
-          title: err.response.data.message
-            ? err.response.data.message
-            : err.message,
+          title: "Image not added to Gallery",
         });
       },
     });
@@ -91,12 +87,15 @@ const BackendPhotoGallery = () => {
                       <CldUploadButton
                         uploadPreset="njqfzuge"
                         {...field}
-                        onSuccess={(result) =>
-                          form.setValue("image", [
-                            ...form.getValues().image,
-                            result.info.url,
-                          ])
-                        }
+                        onSuccess={(result) => {
+                          const url = (result?.info as any)?.url;
+                          if (url) {
+                            form.setValue("image", [
+                              ...form.getValues().image,
+                              url,
+                            ]);
+                          }
+                        }}
                       />
                     </Button>
                   </FormControl>
@@ -123,7 +122,7 @@ const BackendPhotoGallery = () => {
             <Loader2 className="animate-spin" /> loading
           </div>
         ) : (
-          <TableImage data={data} tableHead={["Image", "Action"]} />
+          <TableImage data={data as any} tableHead={["Image", "Action"]} />
         )}
       </div>
     </>

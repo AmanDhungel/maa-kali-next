@@ -4,13 +4,13 @@ import { connectDB } from "../controllers/connectDB";
 
 export async function POST(req: Request) {
   await connectDB();
-  const verificationResponse = await verifyToken(req);
+  const verificationResponse = await verifyToken();
   if (verificationResponse?.status === 401) {
     return verificationResponse;
   }
   try {
-    const { title, description } = await req.json();
-    const newService = new Service({ title, description });
+    const { image, title, description } = await req.json();
+    const newService = new Service({ image, title, description });
     await newService.save();
     return new Response(
       JSON.stringify({ message: "Service Created Successfully" }),

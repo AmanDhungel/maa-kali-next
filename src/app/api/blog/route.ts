@@ -1,10 +1,14 @@
-import Blog from "@/app/api/model/Blog.model";
-import { verifyToken } from "../controllers/verifyToken";
-import { connectDB } from "../controllers/connectDB";
+/* eslint-disable */
+import { NextRequest } from "next/server";
 
-export async function POST(req: Request) {
+import Blog from "@/app/api/model/Blog.model";
+
+import { connectDB } from "../controllers/connectDB";
+import { verifyToken } from "../controllers/verifyToken";
+
+export async function POST(req: NextRequest) {
   await connectDB();
-  const verificationResponse = await verifyToken(req);
+  const verificationResponse = await verifyToken();
   if (verificationResponse?.status === 401) {
     return verificationResponse;
   }
@@ -19,7 +23,6 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error(error);
     return new Response(
       JSON.stringify({ message: "Something went wrong", error }),
       { status: 500 }
@@ -33,7 +36,6 @@ export async function GET() {
     const blog = await Blog.find();
     return new Response(JSON.stringify(blog), { status: 200 });
   } catch (error) {
-    console.error(error);
     return new Response(
       JSON.stringify({ message: "Something went wrong", error }),
       { status: 500 }

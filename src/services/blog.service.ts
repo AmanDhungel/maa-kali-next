@@ -3,7 +3,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 interface BlogData {
-  _id: string;
+  _id?: string;
   title: string;
   shortDescription: string;
   description: string;
@@ -28,8 +28,8 @@ export const useGetSingleBlog = (id: string) => {
   });
 };
 export const useCreateBlog = () => {
-  return useMutation<void>({
-    mutationFn: async (data) => {
+  return useMutation<BlogData, Error, BlogData>({
+    mutationFn: async (data: BlogData) => {
       const res = await axios.post("/api/blog", data);
       return res.data;
     },

@@ -3,6 +3,7 @@ import "../globals.css";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Provider from "@/lib/query-client-provider";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",

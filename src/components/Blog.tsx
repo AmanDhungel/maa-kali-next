@@ -18,7 +18,7 @@ const Blog = () => {
           <Image
             src="/image/maa-kali-hero.JPG"
             alt=""
-            className="rounded"
+            className="rounded hidden xl:block"
             width={500}
             height={500}
           />
@@ -26,7 +26,7 @@ const Blog = () => {
             <div className="flex justify-between">
               <h5 className="text-xl dark:text-gray-300">
                 Maa Kali Hardware -{" "}
-                <span className="text-lg text-gray-400">
+                <span className="text-lg dark:text-gray-400">
                   &copy; {new Date().getFullYear()}
                 </span>
               </h5>
@@ -43,7 +43,7 @@ const Blog = () => {
             <h2 className="flex text-xl items-center">
               <ArrowBigDownDash className="animate-bounce" /> Our Goal
             </h2>
-            <h2 className="capitalize text-gray-300">
+            <h2 className="capitalize dark:text-gray-300">
               Our goal not only includes of providing with the product but also
               with the best customer service. Test it our For yourself.
               <span className="flex mt-2">
@@ -70,7 +70,7 @@ const Blog = () => {
             <Loader2 className="animate-spin" /> Loading...
           </h1>
         ) : (
-          <BlogCard data={data} />
+          <BlogCard data={data as any} />
         )}
       </div>
     </div>

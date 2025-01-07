@@ -1,8 +1,6 @@
-import Image from 'next/image'
+import Image from "next/image";
 
-const ImageCard = ({ image }) => {
-
-
+const ImageCard = ({ image }: { image: string[] }) => {
   return (
     <div className="flex gap-3">
       {image?.map((item, i) => (

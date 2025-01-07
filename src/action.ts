@@ -1,7 +1,6 @@
-'use server';
+"use server";
 
-
-interface ApiProps extends RequestInit {
+interface ApiProps {
   url: string;
   params?: string;
 }
@@ -32,7 +31,7 @@ export async function Get({ url, params }: ApiProps) {
       ? `${apiUrl}${url}?${params}`
       : `${apiUrl}${url}`;
     const res = await fetch(endpointURL, {
-      method: 'GET',
+      method: "GET",
     });
     // if (res.status === 401) {
     //   await logout();
@@ -45,7 +44,7 @@ export async function Get({ url, params }: ApiProps) {
       throw new Error(error.message, {
         cause: error.cause,
       });
-    throw new Error('An error occurred.');
+    throw new Error("An error occurred.");
   }
 }
 
@@ -63,7 +62,7 @@ export async function Post<PayloadType, ResponseType>({
 }: MutatorProps<PayloadType>): Promise<ResponseType> {
   try {
     const res = await fetch(`${apiUrl}${url}`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(data),
     });
     // if (res.status === 401) {
@@ -74,7 +73,7 @@ export async function Post<PayloadType, ResponseType>({
   } catch (error) {
     if (error instanceof Error)
       throw new Error(error.message, { cause: error.cause });
-    throw new Error('An error occurred.');
+    throw new Error("An error occurred.");
   }
 }
 
@@ -93,7 +92,7 @@ export async function Delete<ResponseType>({
 }): Promise<ResponseType> {
   try {
     const res = await fetch(`${apiUrl}${url}`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ id }),
     });
     // if (res.status === 401) {
@@ -101,10 +100,10 @@ export async function Delete<ResponseType>({
     //   throw new Error('Unauthorized');
     // }
     return (await res.json()) as ResponseType;
-  } catch (error : { status: number; message: string }) {
+  } catch (error: any) {
     throw {
       status: error.status || 500,
-      message: error.message || 'An error occurred',
+      message: error.message || "An error occurred",
     };
   }
 }

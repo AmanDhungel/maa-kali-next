@@ -1,24 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Specify the runtime for the app
   runtime: 'nodejs',
-  webpack(config, options) {
-    config.module.rules.push({
-      test: /\.(mp4|webm|ogg|swf|ogv)$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          publicPath: '/_next/static/videos',
-          outputPath: 'static/videos',
-          name: '[name].[hash].[ext]',
-        },
-      },
-    });
 
-    return config;
-  },
-
+  distDir: '.next/build',
+  // Image optimization settings
   images: {
-    domains: ['res.cloudinary.com', 'images.pexels.com'],
+    domains: [
+      'res.cloudinary.com', // Cloudinary image CDN
+      'images.pexels.com',  // Pexels image CDN
+    ],
   },
 };
 

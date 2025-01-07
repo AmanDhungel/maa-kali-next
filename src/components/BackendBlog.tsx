@@ -19,11 +19,10 @@ import { CldUploadButton } from "next-cloudinary";
 import { useCreateBlog, useGetBlog } from "@/services/blog.service";
 import { toast } from "@/hooks/use-toast";
 import { TableDemo } from "./ui/tableComponent";
-import { useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { useQueryClient } from "react-query";
 
 const BackendBlog = () => {
-  const { handleSubmit } = useForm();
   const { mutate, isPending } = useCreateBlog();
   const queryClient = useQueryClient();
 
@@ -35,7 +34,7 @@ const BackendBlog = () => {
       message: "Phone number must be exactly 10 characters.",
     }),
     image: z.array(z.string()).min(1, {
-      message: "Select the subject you want equire about, it cannot be empty.",
+      message: "Image is required",
     }),
     description: z.string().min(20, {
       message: "description shall be more than 20 characters.",
@@ -55,37 +54,31 @@ const BackendBlog = () => {
   const onSubmit = () => {
     const payload = { ...form.getValues() };
     mutate(payload, {
-      onSuccess: (val) => {
+      onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: ["blog"],
         });
-        console.log(val);
         form.reset();
         toast({
           variant: "success",
           title: "Blog Created successfully",
         });
       },
-      onError: (err) => {
-        console.log("error", err);
+      onError: () => {
         toast({
           variant: "destructive",
-          title: err.response.data.message
-            ? err.response.data.message
-            : err.message,
+          title: "Error creating blog",
         });
       },
     });
   };
-
-  console.log("form values from submit", form.getValues());
 
   const { data, isFetching } = useGetBlog();
 
   return (
     <div className="w-[50rem] flex flex-col justify-center mt-10 m-auto gap-4  ">
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="title"
@@ -132,12 +125,15 @@ const BackendBlog = () => {
                     <CldUploadButton
                       uploadPreset="njqfzuge"
                       {...field}
-                      onSuccess={(result) =>
-                        form.setValue("image", [
-                          ...form.getValues().image,
-                          result.info.url,
-                        ])
-                      }
+                      onSuccess={(result) => {
+                        const url = (result?.info as any)?.url;
+                        if (url) {
+                          form.setValue("image", [
+                            ...form.getValues().image,
+                            url,
+                          ]);
+                        }
+                      }}
                       className="w-full"
                     />
                   </Button>
@@ -148,15 +144,21 @@ const BackendBlog = () => {
           />
 
           {/* ReactQuill integration */}
-          <FormItem>
-            <FormLabel>Content</FormLabel>
-            <ReactQuill
-              theme="snow"
-              value={form.getValues().description}
-              onChange={(content) => form.setValue("description", content)} // Track value changes
-            />
-            <FormMessage />
-          </FormItem>
+          <FormField
+            control={form.control}
+            name="description"
+            render={() => (
+              <FormItem>
+                <FormLabel>Content</FormLabel>
+                <ReactQuill
+                  theme="snow"
+                  value={form.getValues().description}
+                  onChange={(content) => form.setValue("description", content)} // Track value changes
+                />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <Button type="submit" className="mt-4" disabled={isPending}>
             {isPending ? (

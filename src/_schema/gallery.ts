@@ -1,14 +1,11 @@
-import { z } from 'zod'
+import { z } from "zod";
 
-export const gallerySchema = z.array(z.object({
-	id: z.string().optional(),
-	image: z.string().optional(),
-	title: z.string().optional(),
-	data: z.array(z.object({
-		id: z.string().optional(),
-		image: z.string().optional(),
-		title: z.string().optional(),
-	})).optional(),
-})).optional()
+export const gallerySchema = z.object({
+  data: z.array(
+    z.object({
+      image: z.array(z.string()).optional(),
+    })
+  ),
+});
 
-export type GallerySchema = z.infer<typeof gallerySchema>
+export type GallerySchema = z.infer<typeof gallerySchema>;

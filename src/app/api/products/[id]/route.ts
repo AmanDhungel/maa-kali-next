@@ -21,7 +21,6 @@ export async function DELETE(
       }
     );
   } catch (error) {
-    console.error("error", error);
     return new Response(
       JSON.stringify({ message: "Something went wrong", error }),
       {

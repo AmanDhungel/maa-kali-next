@@ -1,8 +1,11 @@
+"use client";
 import React from "react";
 import Banner from "./Banner";
 import Product from "./Product";
 import { useGETProduct } from "@/services/product.service";
 import { Loader2 } from "lucide-react";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export interface ProductProps {
   id: string;
@@ -10,14 +13,16 @@ export interface ProductProps {
   color: string;
   price: string;
   image: string;
+  brand: string;
+  years: string;
+  description: string;
+  choice: string;
+  message?: string;
 }
-[];
 
 const ProductTestimonials = () => {
   const { data, isLoading } = useGETProduct();
 
-  console.log("data", data);
-  // const productdata = [
   //   {
   //     title: "Plumbing",
   //     color: "black",
@@ -90,23 +95,25 @@ const ProductTestimonials = () => {
           description="Some of the Product we sell are listed Down - Take a look"
         />
       </div>
+
       <div className="flex flex-wrap justify-center m-auto max-w-[82rem] gap-10">
         {isLoading ? (
           <div className="flex">
             <Loader2 className="animate-spin" /> Loading...
           </div>
         ) : (
-          data?.map((pdata) => (
-            <Product
-              title={pdata.title}
-              color={pdata.color}
-              price={pdata.price}
-              image={pdata.image}
-              key={pdata._id}
-            />
-          ))
+          data
+            ?.splice(0, 3)
+            ?.map((pdata) => <Product {...pdata} key={pdata.id} />)
         )}
       </div>
+      <Link href="/products" className="flex justify-center items-center">
+        <Button
+          variant={"outline"}
+          className="flex justify-center text-blue-500 mt-10">
+          View More Products
+        </Button>
+      </Link>
     </div>
   );
 };

@@ -17,9 +17,20 @@ export async function GET() {
 
 export async function POST(req: Request) {
   await connectDB();
-  const { price, title, description, image, color } = await req.json();
+  const { price, title, description, image, color, choice, years, brand } =
+    await req.json();
+
   try {
-    const newProduct = new Product({ price, title, description, image, color });
+    const newProduct = new Product({
+      choice,
+      years,
+      brand,
+      price,
+      title,
+      description,
+      image,
+      color,
+    });
     await newProduct.save();
 
     return new Response(

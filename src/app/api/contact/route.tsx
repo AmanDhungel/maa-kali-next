@@ -35,9 +35,8 @@ export async function POST(req: Request) {
       }
     );
   } catch (error) {
-    console.error("Error in contact submission:", error);
     return new Response(
-      JSON.stringify({ message: "Something went wrong", error: error.message }),
+      JSON.stringify({ message: "Something went wrong", error }),
       {
         status: 500,
       }
@@ -51,7 +50,6 @@ export async function GET() {
     const contact = await Contact.find();
     return new Response(JSON.stringify(contact), { status: 200 });
   } catch (error) {
-    console.error(error);
     return new Response(
       JSON.stringify({
         message: "Something went wrong while getting contact",

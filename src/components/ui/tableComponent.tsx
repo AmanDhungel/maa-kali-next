@@ -14,30 +14,34 @@ import { Eraser, Trash2 } from "lucide-react";
 import AlertDailog from "../AlertDailog";
 import { CarouselDemo } from "../Carousel";
 
-export function TableDemo({ data, ...props }) {
+export function TableDemo({
+  data,
+  ...props
+}: {
+  data: any;
+  tableCap?: string;
+  tableHead?: string[];
+}) {
   const queryClient = useQueryClient();
 
   const { mutate } = useDeleteBlog();
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: any) => {
     mutate(id, {
-      onSuccess: (val) => {
+      onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: ["blog"],
         });
         toast({
           variant: "success",
-          title: val.message,
+          title: "blog deleted successfully",
         });
       },
 
-      onError: (err) => {
-        console.log("error", err);
+      onError: () => {
         toast({
           variant: "destructive",
-          title: err.response?.data?.message
-            ? err.response.data.message
-            : err.message,
+          title: "Error deleting blog",
         });
       },
     });
@@ -50,22 +54,17 @@ export function TableDemo({ data, ...props }) {
       </TableCaption>
       <TableHeader>
         <TableRow>
-          {props.tableHead.map((data, index) => (
-            <TableHead
-              key={index}
-              className={
-                index === props.tableHead.length - 1 ? "text-right" : ``
-              }>
-              {data}
-            </TableHead>
-          ))}
+          {props.tableHead &&
+            props.tableHead.map((data, index) => (
+              <TableHead key={index}>{data}</TableHead>
+            ))}
         </TableRow>
       </TableHeader>
       <TableBody className="w-full text-wrap">
         {/* {!data && data?.length < 1 ?
            "No Data Found"
           :  */}
-        {data?.map((tableData) => (
+        {data?.map((tableData: any) => (
           <TableRow key={tableData._id} className="text-wrap w-10">
             <TableCell className="font-medium">
               {tableData.image?.length > 1 && (
@@ -73,19 +72,21 @@ export function TableDemo({ data, ...props }) {
               )}
             </TableCell>
             <TableCell className="w-10 text-wrap">
-              <p className="w-32 overflow-hidden overflow-ellipsis">
+              <p className="w-32 h-16 overflow-hidden overflow-ellipsis break-words">
                 {tableData.title}
               </p>
             </TableCell>
             <TableCell>
-              <p className="w-32 overflow-hidden overflow-ellipsis h-10 flex items-center">
+              <p className="w-32  h-16  overflow-ellipsis hide-scrollbar text-wrap break-words">
                 {tableData.shortDescription}
               </p>
             </TableCell>
             <TableCell>
               <p
-                className="flex justify-center items-center w-32 h-10 overflow-hidden overflow-ellipsis"
-                dangerouslySetInnerHTML={{ __html: tableData.description }}></p>
+                className="w-32 h-16 overflow-hidden overflow-ellipsis break-words"
+                dangerouslySetInnerHTML={{
+                  __html: tableData.description ?? "",
+                }}></p>
             </TableCell>
             <TableCell>
               <div className="relative group cursor-pointer">
