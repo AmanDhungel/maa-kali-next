@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.1",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-alert-dialog": "^1.1.2",
@@ -33,6 +34,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "express": "^4.21.1",
+    "gsap": "^3.12.5",
     "jose": "^5.9.6",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",

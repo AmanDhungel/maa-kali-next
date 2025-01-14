@@ -1,3 +1,4 @@
+"use client";
 import {
   Cable,
   DoorOpen,
@@ -13,8 +14,27 @@ import {
   Wrench,
 } from "lucide-react";
 import Banner from "./Banner";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const OurWork = () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  useGSAP(() => {
+    ScrollTrigger.batch("#services", {
+      onEnter: (batch) =>
+        gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 1 }),
+    });
+
+    ScrollTrigger.create({
+      trigger: "#services",
+      start: "top 70%",
+      end: "bottom 30%",
+      endTrigger: "#endTrigger",
+    });
+  });
+
   return (
     <>
       <div className="container relative flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
@@ -26,7 +46,9 @@ const OurWork = () => {
       </div>
       <div className="container relative flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3 justify-items-stretch max-sm:grid-cols-1">
-          <div className="flex flex-col gap-3  text-justify">
+          <div
+            className="flex flex-col gap-3  text-justify opacity-0"
+            id="services">
             <div className="flex gap-3">
               <Hammer className="dark:text-gray-500" />
               <Wrench className="rotate-[270deg] -ml-11 dark:text-gray-500" />
@@ -40,7 +62,9 @@ const OurWork = () => {
               system, we have the right products for you.
             </h2>
           </div>
-          <div className="flex flex-col gap-3  text-justify">
+          <div
+            className="flex flex-col gap-3  text-justify opacity-0"
+            id="services">
             <div className="flex gap-3">
               <PaintBucket className="dark:text-gray-500" />
               <PaintRoller className="dark:text-gray-500" />
@@ -53,7 +77,9 @@ const OurWork = () => {
               right products for the job.
             </h2>
           </div>
-          <div className="flex flex-col gap-3  text-justify">
+          <div
+            className="flex flex-col gap-3  text-justify opacity-0"
+            id="services">
             <div className="flex gap-3">
               <Cable className="dark:text-gray-500" />
               <Unplug className="dark:text-gray-500" />
@@ -67,7 +93,9 @@ const OurWork = () => {
               connection, repairing old wiring, remember us.
             </h2>
           </div>
-          <div className="flex flex-col gap-3  text-justify">
+          <div
+            className="flex flex-col gap-3  text-justify opacity-0"
+            id="services">
             <div className="flex gap-3">
               <LampCeiling className="dark:text-gray-500" />
               <ShieldCheck className="dark:text-gray-500" />
@@ -80,7 +108,9 @@ const OurWork = () => {
               right products for the job.
             </h2>
           </div>
-          <div className="flex flex-col gap-3  text-justify">
+          <div
+            className="flex flex-col gap-3  text-justify opacity-0"
+            id="services">
             <div className="flex gap-3">
               <DoorOpen className="dark:text-gray-500" />
               <Grid2x2 className="dark:text-gray-500" />
@@ -93,7 +123,9 @@ const OurWork = () => {
               right products for the job.
             </h2>
           </div>
-          <div className="flex flex-col gap-3  text-justify">
+          <div
+            className="flex flex-col gap-3  text-justify opacity-0"
+            id="services">
             <div className="flex gap-3">
               <House className="dark:text-gray-500" />
               <RotateCcw className="dark:text-gray-500" />
@@ -111,6 +143,7 @@ const OurWork = () => {
           </div>
         </div>
       </div>
+      <div id="endTrigger"></div>
     </>
   );
 };

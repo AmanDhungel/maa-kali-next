@@ -241,3 +241,15 @@ body {
 	scrollbar-width: none;
 	/* Firefox */
 }
+
+.gsap-marker {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+.gsap-marker-start,
+.gsap-marker-end {
+	z-index: 9999 !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+}

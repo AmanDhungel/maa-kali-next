@@ -9,7 +9,9 @@ const Services = () => {
 
   return (
     <>
-      <div className="container relative  justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10">
+      <div
+        className="container relative  justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10"
+        id="work">
         <Banner
           title="Our Work"
           description="Testimonials of our Work - The Showcase"
