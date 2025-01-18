@@ -1,6 +1,5 @@
-import gsap from "gsap";
-import Image from "next/image";
-import React, { useRef } from "react";
+import React from "react";
+import { ServiceCard } from "./ServicesCard";
 
 export interface Props {
   data: {
@@ -21,50 +20,12 @@ export interface ApiProps {
 }
 
 const ScrollableCard = ({ data, isLoading }: Props) => {
-  const animateServiceRef = useRef<HTMLDivElement | null>(null);
-
-  React.useEffect(() => {
-    if (isLoading && animateServiceRef.current) {
-      gsap.to(animateServiceRef.current, {
-        opacity: 1,
-        duration: 0.5,
-        x: 0,
-        ease: "power4.out",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: animateServiceRef.current,
-          start: "top 70%",
-          end: "bottom 80%",
-          endTrigger: "#footer",
-        },
-      });
-    }
-  }, [isLoading, animateServiceRef]);
   return (
     <div className="flex flex-wrap">
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 2xl:grid-cols-4 justify-items-center w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 2xl:grid-cols-3 2xl:gap-12  w-full  justify-between">
         {data?.map((item) => {
           return (
-            <div
-              className="flex-col w-[80vw] md:w-[44vw] lg:w-[44vw]  xl:w-[24vw] 2xl:w-[17vw] flex mt-5"
-              key={item._id}
-              ref={animateServiceRef}>
-              <Image
-                src={item?.image ? item?.image : "/image/maa-kali-hero.JPG"}
-                alt=""
-                className="rounded-b-none w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] lg:[25vw] lg:h-[40vw]  2xl:w-[17vw] 2xl:h-[17vw] rounded-2xl"
-                width={250}
-                height={250}
-              />
-              <div className=" rounded-2xl rounded-t-none flex flex-col flex-wrap w-[80vw]  md:w-[44vw]  min-h-[11rem]  xl:w-[24vw] border-t-0 2xl:border-t space-y-5 border   p-5 2xl:w-[17vw]">
-                <h1 className="text-xl font-semibold w-full overflow-hidden overflow-ellipsis">
-                  {item?.title}
-                </h1>
-                <h2 className="whitespace-pre-wrap break-words w-full line-clamp-5">
-                  {item?.description}
-                </h2>
-              </div>
-            </div>
+            <ServiceCard item={item} isLoading={isLoading} key={item._id} />
           );
         })}
       </div>

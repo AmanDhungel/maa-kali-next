@@ -53,28 +53,6 @@ const OurWork = () => {
         },
       },
     });
-    // ScrollTrigger.batch("#services", {
-    //   onEnter: (batch) =>
-    //     gsap.to(batch, { autoAlpha: 2, stagger: 0.3, opacity: 1 }),
-    //   onEnterBack: (batch) =>
-    //     gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 1 }),
-
-    //   // onLeave: (batch) =>
-    //   //   gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 0 }),
-    //   // onLeaveBack: (batch) =>
-    //   //   gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 0 }),
-
-    //   onLeave: (batch) =>
-    //     gsap.to(batch, { autoAlpha: 0, stagger: 0.1, opacity: 0 }),
-    // });
-
-    // ScrollTrigger.create({
-    //   trigger: "#services",
-    //   start: "top 80%",
-    //   end: "top 30%",
-    //   endTrigger: "#endTrigger",
-    //   markers: true,
-    // });
   });
 
   return (

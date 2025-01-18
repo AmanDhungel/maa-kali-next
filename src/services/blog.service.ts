@@ -10,7 +10,7 @@ interface BlogData {
   image: string[];
 }
 export const useGetBlog = () => {
-  return useQuery<void>({
+  return useQuery<any, any, any>({
     queryKey: ["blog"],
     queryFn: async () => {
       const res = await axios.get("/api/blog");

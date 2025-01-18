@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Provider from "@/lib/query-client-provider";
 import React from "react";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",
@@ -41,6 +42,7 @@ export default function RootLayout({
           <Navbar data={data} />
         </div>
         <Provider>{children}</Provider>
+        <Toaster />
         <Footer />
       </body>
     </html>

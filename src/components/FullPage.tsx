@@ -15,7 +15,6 @@ const FullPage = () => {
       opacity: 1,
       duration: 1,
       ease: "power4.out",
-      delay: 0.5,
       scrollTrigger: {
         trigger: "#trggrStart",
         start: "top 50%",
@@ -44,7 +43,6 @@ const FullPage = () => {
       opacity: 1,
       duration: 1,
       ease: "power4.out",
-      delay: 0.5,
       scrollTrigger: {
         trigger: "#img",
         start: "top 50%",

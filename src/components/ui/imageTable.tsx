@@ -75,8 +75,8 @@ export function TableImage({
           return (
             <TableRow key={tableData._id} className="text-wrap w-10">
               <TableCell className="font-medium">
-                {tableData?.image?.length > 1 && (
-                  <CarouselDemo item={tableData?.image} />
+                {tableData.image.length >= 1 && (
+                  <CarouselDemo item={tableData.image} />
                 )}
               </TableCell>
               <TableCell>

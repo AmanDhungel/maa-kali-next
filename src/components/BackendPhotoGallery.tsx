@@ -45,19 +45,22 @@ const BackendPhotoGallery = () => {
         title: "No image selected",
       });
     }
-    mutate(payload as any, {
-      onSuccess: () => {
-        form.reset();
+
+    console.log("payload", payload.image);
+    mutate({ ...form.getValues() } as any, {
+      onSuccess: (val: any) => {
+        console.log("val", val);
+        queryClient.invalidateQueries({
+          queryKey: ["gallery"],
+        });
         toast({
           variant: "success",
           title: "Image Added to Gallery",
         });
-
-        queryClient.invalidateQueries({
-          queryKey: ["gallery"],
-        });
+        form.reset();
       },
-      onError: () => {
+      onError: (err: any) => {
+        console.log("err", err);
         toast({
           variant: "destructive",
           title: "Image not added to Gallery",
@@ -88,10 +91,11 @@ const BackendPhotoGallery = () => {
                         uploadPreset="njqfzuge"
                         {...field}
                         onSuccess={(result) => {
+                          console.log("url", result);
                           const url = (result?.info as any)?.url;
                           if (url) {
                             form.setValue("image", [
-                              ...form.getValues().image,
+                              ...form.getValues("image"),
                               url,
                             ]);
                           }

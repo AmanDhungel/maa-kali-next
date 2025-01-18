@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useGetGallery } from "@/services/gallery.service";
 import { Loader2 } from "lucide-react";
+import ImageCard from "./ImageCard";
 
 export interface GalleryProps {
   id: string;
@@ -12,7 +13,7 @@ export interface GalleryProps {
 }
 
 const PhotoGallery = () => {
-  const { data, isLoading } = useGetGallery();
+  const { data, isLoading, isFetched } = useGetGallery();
   const [images, setImages] = useState<string[]>([]);
 
   React.useEffect(() => {
@@ -62,16 +63,7 @@ const PhotoGallery = () => {
           </div>
         ) : (
           images?.map((item, i) => {
-            return (
-              <Image
-                src={item}
-                key={i}
-                className="w-[24rem] h-[25rem] object-cover"
-                width={500}
-                height={500}
-                alt="maa kali hardware"
-              />
-            );
+            return <ImageCard image={item} key={i} isLoading={isFetched} />;
           })
         )}
       </div>

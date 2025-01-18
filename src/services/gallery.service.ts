@@ -18,13 +18,10 @@ export const useGetGallery = () => {
 };
 
 export const useCreateGallery = () => {
-  return useMutation<
-    ApiResponse<GallerySchema>,
-    { message: string },
-    { data: GallerySchema }
-  >({
-    mutationFn: async ({ data }: { data: GallerySchema }) => {
-      const res = await axios.post("/api/gallery", { data });
+  return useMutation<ApiResponse<any>, { message: string }, { image: string }>({
+    mutationFn: async ({ image }) => {
+      console.log("Gallery Create", image);
+      const res = await axios.post("/api/gallery", { image });
       return res.data;
     },
   });

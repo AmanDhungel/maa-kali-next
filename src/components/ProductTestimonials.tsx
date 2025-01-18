@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Banner from "./Banner";
 import Product from "./Product";
 import { useGETProduct } from "@/services/product.service";
@@ -28,7 +28,6 @@ const ProductTestimonials = () => {
   const [productData, setProductData] = React.useState<
     ProductProps[] | undefined
   >(data);
-  const animateRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const ProductTestimonials = () => {
             </div>
           ) : productData && productData.length > 0 ? (
             productData.map((pdata) => (
-              <div key={pdata.id} ref={animateRef}>
+              <div key={pdata.id}>
                 <Product {...pdata} isLoading={isFetched} />
               </div>
             ))

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Banner from "./Banner";
-import { ArrowBigDownDash, Loader2 } from "lucide-react";
+import { ArrowBigDownDash, Loader2, X } from "lucide-react";
 import { Button } from "./ui/button";
 import BlogCard from "./BlogCard";
 import { useGetBlog } from "@/services/blog.service";
@@ -69,8 +69,13 @@ const Blog = () => {
           <h1 className="flex gap-3">
             <Loader2 className="animate-spin" /> Loading...
           </h1>
-        ) : (
+        ) : data && data.length > 0 ? (
           <BlogCard data={data as any} />
+        ) : (
+          <h1 className="flex items-center text-3xl font-sans font-bold mt-5">
+            No Blog Available!
+            <X size={35} className="text-red-500" />
+          </h1>
         )}
       </div>
     </div>
