@@ -24,7 +24,7 @@ const Product = ({
 }) => {
   const animateRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
-
+  gsap.registerPlugin(ScrollTrigger);
   const gsapProductAnimation = () => {
     gsap.to(animateRef.current, {
       opacity: 1,
