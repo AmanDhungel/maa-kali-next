@@ -29,7 +29,7 @@ const ImageCard = ({
             gsap.to(animateImageRef.current, {
               autoAlpha: 0,
               opacity: 0,
-              duration: 0.1,
+              duration: 0.3,
               x: -200,
             });
           },
@@ -37,7 +37,7 @@ const ImageCard = ({
             gsap.to(animateImageRef.current, {
               autoAlpha: 2,
               opacity: 1,
-              duration: 0.1,
+              duration: 0.3,
               x: 0,
             });
           },
