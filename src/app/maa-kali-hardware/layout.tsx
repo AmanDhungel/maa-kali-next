@@ -27,6 +27,10 @@ export default function RootLayout({
       href: "/maa-kali-hardware/services",
     },
     {
+      title: "product",
+      href: "/maa-kali-hardware/products",
+    },
+    {
       title: "Blog",
       href: "/maa-kali-hardware/blog",
     },

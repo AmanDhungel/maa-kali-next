@@ -6,7 +6,9 @@ import React from "react";
 const Footer = () => {
   const date = new Date().getFullYear();
   return (
-    <div className="flex flex-col justify-center m-auto  items-center  gap-10 p-10 mt-10 border rounded-xl md:w-[50rem] m-auto mb-4">
+    <div
+      className="flex flex-col justify-center m-auto  items-center  gap-10 p-10 mt-10 border rounded-xl md:w-[50rem]  mb-4"
+      id="footer">
       <div id="links" className="flex gap-4 md:gap-9 text-lg">
         <Link href="/">Home</Link>
         <Link href="/">About</Link>

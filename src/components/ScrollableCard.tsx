@@ -1,5 +1,6 @@
+import gsap from "gsap";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 
 export interface Props {
   data: {
@@ -9,6 +10,7 @@ export interface Props {
     description: string;
     shortDescription: string;
   }[];
+  isLoading?: boolean;
 }
 export interface ApiProps {
   _id: string;
@@ -18,7 +20,26 @@ export interface ApiProps {
   shortDescription: string;
 }
 
-const ScrollableCard = ({ data }: Props) => {
+const ScrollableCard = ({ data, isLoading }: Props) => {
+  const animateServiceRef = useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    if (isLoading && animateServiceRef.current) {
+      gsap.to(animateServiceRef.current, {
+        opacity: 1,
+        duration: 0.5,
+        x: 0,
+        ease: "power4.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: animateServiceRef.current,
+          start: "top 70%",
+          end: "bottom 80%",
+          endTrigger: "#footer",
+        },
+      });
+    }
+  }, [isLoading, animateServiceRef]);
   return (
     <div className="flex flex-wrap">
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 2xl:grid-cols-4 justify-items-center w-full">
@@ -26,7 +47,8 @@ const ScrollableCard = ({ data }: Props) => {
           return (
             <div
               className="flex-col w-[80vw] md:w-[44vw] lg:w-[44vw]  xl:w-[24vw] 2xl:w-[17vw] flex mt-5"
-              key={item._id}>
+              key={item._id}
+              ref={animateServiceRef}>
               <Image
                 src={item?.image ? item?.image : "/image/maa-kali-hero.JPG"}
                 alt=""

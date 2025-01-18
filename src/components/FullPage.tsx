@@ -10,14 +10,66 @@ import gsap from "gsap";
 
 const FullPage = () => {
   useGSAP(() => {
-    gsap.to("#iframe", { x: 0, opacity: 1, duration: 2, ease: "bounce.inOut" });
-    gsap.to(".img", {
-      delay: 2,
+    gsap.to("#iframe", {
+      x: 0,
       opacity: 1,
-      duration: 0.5,
-      ease: "power2",
+      duration: 1,
+      ease: "power4.out",
+      delay: 0.5,
+      scrollTrigger: {
+        trigger: "#trggrStart",
+        start: "top 50%",
+        end: "top 40%",
+        endTrigger: "#triggerEnd",
+        onLeave: () => {
+          gsap.to("#iframe", {
+            autoAlpha: 0,
+            opacity: 0,
+            duration: 1,
+            x: -200,
+          });
+        },
+        onEnterBack: () => {
+          gsap.to("#iframe", {
+            autoAlpha: 2,
+            opacity: 1,
+            duration: 1,
+            x: 0,
+          });
+        },
+      },
+    });
+    gsap.to("#img", {
+      x: 0,
+      opacity: 1,
+      duration: 1,
+      ease: "power4.out",
+      delay: 0.5,
+      scrollTrigger: {
+        trigger: "#img",
+        start: "top 50%",
+        end: "top 40%",
+        endTrigger: "#triggerEnd",
+        onLeave: () => {
+          gsap.to("#img", {
+            autoAlpha: 0,
+            opacity: 0,
+            duration: 1,
+            x: 200,
+          });
+        },
+        onEnterBack: () => {
+          gsap.to("#img", {
+            autoAlpha: 2,
+            opacity: 1,
+            duration: 1,
+            x: 0,
+          });
+        },
+      },
     });
   });
+
   return (
     <>
       <div className="overflow-hidden flex flex-col gap-4">
@@ -33,10 +85,13 @@ const FullPage = () => {
           <div className="animate-bounce hidden md:block">
             <ArrowDownNarrowWide className="ml-12" />
           </div>
-          <div className="xl:flex gap-3 max-lg:flex-col  max-lg:gap-3  ">
+          <div
+            className="xl:flex gap-3 max-lg:flex-col  max-lg:gap-3  "
+            id="trggrStart">
             <Image
               src="/image/maa-kali-hero.JPG"
-              className="rounded-xl w-[80vw]  xl:w-[40vw] 2xl:w-[30vw] opacity-0 img"
+              className="rounded-xl w-[80vw] translate-x-96  xl:w-[40vw] 2xl:w-[30vw] opacity-0 "
+              id="img"
               alt=""
               width={650}
               height={450}
@@ -62,6 +117,7 @@ const FullPage = () => {
             </div>
           </div>
         </div>
+        <span id="triggerEnd"></span>
         <OurWork />
         <ServicesPage />
         <ProductTestimonials />

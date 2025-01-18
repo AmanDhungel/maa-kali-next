@@ -1,4 +1,4 @@
-import PhotoGallery from "@/components/PhotoGallery";
+import ProductTestimonials from "@/components/ProductTestimonials";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,4 +6,4 @@ export const metadata: Metadata = {
   description: "Hardware near you, Construction company",
 };
 
-export default PhotoGallery;
+export default ProductTestimonials;

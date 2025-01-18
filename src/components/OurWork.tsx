@@ -22,29 +22,71 @@ const OurWork = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
-    ScrollTrigger.batch("#services", {
-      onEnter: (batch) =>
-        gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 1 }),
-    });
+    gsap.to("#services", {
+      opacity: 1,
+      duration: 0.5,
+      ease: "power4.out",
+      stagger: 0.3,
+      scrollTrigger: {
+        trigger: "#services",
+        start: "top 80%",
+        end: "top 30%",
+        endTrigger: "#endTrigger",
 
-    ScrollTrigger.create({
-      trigger: "#services",
-      start: "top 70%",
-      end: "bottom 30%",
-      endTrigger: "#endTrigger",
+        onLeave: () => {
+          gsap.to("#services", {
+            autoAlpha: 0,
+            opacity: 0,
+            duration: 1,
+            x: -200,
+            stagger: 0.1,
+          });
+        },
+        onEnterBack: () => {
+          gsap.to("#services", {
+            autoAlpha: 2,
+            opacity: 1,
+            duration: 1,
+            x: 0,
+            stagger: 0.1,
+          });
+        },
+      },
     });
+    // ScrollTrigger.batch("#services", {
+    //   onEnter: (batch) =>
+    //     gsap.to(batch, { autoAlpha: 2, stagger: 0.3, opacity: 1 }),
+    //   onEnterBack: (batch) =>
+    //     gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 1 }),
+
+    //   // onLeave: (batch) =>
+    //   //   gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 0 }),
+    //   // onLeaveBack: (batch) =>
+    //   //   gsap.to(batch, { autoAlpha: 2, stagger: 0.1, opacity: 0 }),
+
+    //   onLeave: (batch) =>
+    //     gsap.to(batch, { autoAlpha: 0, stagger: 0.1, opacity: 0 }),
+    // });
+
+    // ScrollTrigger.create({
+    //   trigger: "#services",
+    //   start: "top 80%",
+    //   end: "top 30%",
+    //   endTrigger: "#endTrigger",
+    //   markers: true,
+    // });
   });
 
   return (
     <>
-      <div className="container relative flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
+      <div className="container  flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
         <Banner
           title="Services"
           description="Here Is A Few Of The Awesome Services We Provide."
           className="mt-10"
         />
       </div>
-      <div className="container relative flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
+      <div className="container  flex flex-col justify-center h-full max-w-[73.5rem] px-10 mx-auto xl:px-0 mt-5 m-auto left-2">
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3 justify-items-stretch max-sm:grid-cols-1">
           <div
             className="flex flex-col gap-3  text-justify opacity-0"
@@ -142,8 +184,8 @@ const OurWork = () => {
             </h2>
           </div>
         </div>
+        <div id="endTrigger"></div>
       </div>
-      <div id="endTrigger"></div>
     </>
   );
 };

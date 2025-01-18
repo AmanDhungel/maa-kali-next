@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import ScrollableCard from "./ScrollableCard";
 
 const Services = () => {
-  const { data: serviceData, isFetching } = useGetService();
+  const { data: serviceData, isFetching, isFetched } = useGetService();
 
   return (
     <>
@@ -25,7 +25,7 @@ const Services = () => {
             </p>
           ) : (
             <div className="flex flex-wrap justify-center items-center w-full h-full">
-              <ScrollableCard data={serviceData as any} />
+              <ScrollableCard isLoading={isFetched} data={serviceData as any} />
             </div>
           )}
         </div>

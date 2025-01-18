@@ -1,5 +1,7 @@
+import gsap from "gsap";
 import Image from "next/image";
-import React from "react";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useRef } from "react";
 
 const Product = ({
   title,
@@ -9,6 +11,7 @@ const Product = ({
   choice,
   brand,
   years,
+  isLoading,
 }: {
   title: string;
   color: string;
@@ -17,9 +20,57 @@ const Product = ({
   choice?: string;
   brand?: string;
   years?: string;
+  isLoading?: boolean;
 }) => {
+  const animateRef = useRef<HTMLDivElement | null>(null);
+  const pathname = usePathname();
+
+  const gsapProductAnimation = () => {
+    gsap.to(animateRef.current, {
+      opacity: 1,
+      duration: 0.5,
+      x: 0,
+      ease: "power4.out",
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: animateRef.current,
+        start: "top 70%",
+        end: "bottom 80%",
+        endTrigger: "#endProductsAnimation",
+        onLeaveBack: () => {
+          gsap.to(animateRef.current, {
+            autoAlpha: 0,
+            opacity: 0,
+            duration: 1,
+            x: -200,
+            stagger: 0.1,
+          });
+        },
+
+        onEnter: () => {
+          gsap.to(animateRef.current, {
+            autoAlpha: 2,
+            opacity: 1,
+            duration: 1,
+            x: 0,
+          });
+        },
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (isLoading && animateRef.current && pathname === "/maa-kali-hardware") {
+      gsapProductAnimation();
+    } else if (isLoading && animateRef.current) {
+      gsapProductAnimation();
+    }
+  }, [isLoading, animateRef, pathname]);
+
   return (
-    <div className="mt-6 flex gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-3">
+    <div
+      className="mt-6 flex gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-3 opacity-0 translate-x-10"
+      ref={animateRef}>
       <div className="group relative">
         <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
           <Image
