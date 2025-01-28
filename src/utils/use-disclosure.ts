@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export interface DisclosureProps {
   isOpen: boolean;
-  onToggle: (isOpen: boolean) => void;
+  onToggle: () => void;
   onOpen: () => void;
   onClose: () => void;
 }
