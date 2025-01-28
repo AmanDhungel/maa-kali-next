@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import { Navbar } from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Provider from "@/lib/query-client-provider";
-import { Toaster } from "@/components/ui/toaster";
 import React from "react";
+import LayoutComponent from "@/components/LayoutComponent";
 
 export const metadata: Metadata = {
   title: "Maa Kali Hardware",
@@ -17,41 +14,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data = [
-    {
-      title: "Home",
-      href: "/maa-kali-hardware",
-    },
-    {
-      title: "Services",
-      href: "/maa-kali-hardware/services",
-    },
-    {
-      title: "product",
-      href: "/maa-kali-hardware/products",
-    },
-    {
-      title: "Blog",
-      href: "/maa-kali-hardware/blog",
-    },
-    {
-      title: "Contact",
-      href: "/maa-kali-hardware/contact",
-    },
-    {
-      title: "gallery",
-      href: "/maa-kali-hardware/gallery",
-    },
-  ];
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <div className="p-8 flex justify-center">
-          <Navbar data={data} />
-        </div>
-        <Provider>{children}</Provider>
-        <Toaster />
-        <Footer />
+        <LayoutComponent>{children}</LayoutComponent>
       </body>
     </html>
   );

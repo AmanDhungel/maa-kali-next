@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
+import { Button } from "./ui/button";
 
 type data = {
   href?: string;
@@ -25,9 +26,9 @@ export function Navbar({ data }: { data?: data[] }) {
             onClick={() => setIsOpen(!isOpen)}
             href={navdata?.href ? navdata?.href : ""}
             key={index}
-            className={` ${
+            className={`${
               pathname === navdata?.href ? "animated-grey text-black" : ""
-            } `}>
+            }`}>
             <MenubarMenu>
               <MenubarTrigger className="cursor-pointer">
                 {navdata?.title}
@@ -35,6 +36,18 @@ export function Navbar({ data }: { data?: data[] }) {
             </MenubarMenu>
           </Link>
         ))}
+        <Button>
+          <Link
+            href={
+              pathname.includes("/maa-kali-hardware")
+                ? "/national-home-decor"
+                : "/maa-kali-hardware "
+            }>
+            {pathname.includes("/maa-kali-hardware")
+              ? "National Home Decor"
+              : "Maa kali hardware"}
+          </Link>
+        </Button>
         <MenubarMenu>
           <DarkModeToggle />
         </MenubarMenu>
