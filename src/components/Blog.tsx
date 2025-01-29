@@ -11,6 +11,8 @@ import { useGetBlog } from "@/services/blog.service";
 const Blog = () => {
   const { data, isFetching } = useGetBlog();
 
+  console.log("data", data);
+
   return (
     <div>
       <div className="container relative flex flex-col justify-between h-full max-w-[68rem] px-10 mx-auto xl:px-0 mt-10">
