@@ -30,7 +30,7 @@ const BackendBlog = () => {
     title: z.string().min(2, {
       message: "Username must be at least 2 characters.",
     }),
-    shortDescription: z.string().min(10).max(10, {
+    shortDescription: z.string().min(10, {
       message: "Phone number must be exactly 10 characters.",
     }),
     image: z.array(z.string()).min(1, {
