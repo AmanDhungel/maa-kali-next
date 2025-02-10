@@ -19,6 +19,10 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Maa Kali Hardware X National Home Decor",
   description: "Hardware near you, Construction company, Maa Kali Hardware",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
